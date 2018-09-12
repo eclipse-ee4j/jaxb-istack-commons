@@ -25,11 +25,8 @@
 .txt
 .bat
 .sh
-/CDDL+GPLv2.xml
 /copyright-exclude
 /LICENSE
-/CDDL+GPLv2.txt
-CDDL+GPLv2.html
 /copyright.txt
 .commented
 /.auth
