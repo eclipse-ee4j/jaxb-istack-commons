@@ -22,16 +22,25 @@
 
     <groupId>com.sun.istack</groupId>
     <artifactId>istack-commons</artifactId>
-    <version>3.0.6-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
-    <name>istack common utility code</name>
+    <name>iStack Common Utility Code</name>
     <description>istack common utility code</description>
 
-    <organization>
-        <name>Oracle Corporation</name>
-        <url>http://www.oracle.com/</url>
-    </organization>
+    <scm>
+        <connection>scm:git:ssh://git@github.com/eclipse-ee4j/jaxb-istack-commons.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jaxb-istack-commons.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/jaxb-istack-commons</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Eclipse Distribution License - v 1.0</name>
+            <url>http://www.eclipse.org/org/documents/edl-v10.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <developers>
         <developer>
@@ -41,13 +50,25 @@
         </developer>
     </developers>
 
-    <licenses>
-        <license>
-            <name>Eclipse Distribution License - v 1.0</name>
-            <url>http://www.eclipse.org/org/documents/edl-v10.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+    <organization>
+        <name>Oracle Corporation</name>
+        <url>http://www.oracle.com/</url>
+    </organization>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/eclipse-ee4j/jaxb-istack-commons/issues</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>Eclipse Implementation of JAXB mailing list</name>
+            <post>jaxb-impl-dev@eclipse.org</post>
+            <subscribe>https://dev.eclipse.org/mailman/listinfo/jaxb-impl-dev</subscribe>
+            <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jaxb-impl-dev</unsubscribe>
+            <archive>https://dev.eclipse.org/mhonarc/lists/jaxb-impl-dev</archive>
+        </mailingList>
+    </mailingLists>
 
     <modules>
         <module>buildtools</module>
@@ -58,13 +79,6 @@
         <module>import-properties-plugin</module>
         <module>soimp</module>
     </modules>
-
-    <scm>
-        <connection>scm:git:ssh://git@github.com/eclipse-ee4j/jaxb-istack-commons.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jaxb-istack-commons.git</developerConnection>
-        <url>https://github.com/eclipse-ee4j/jaxb-istack-commons</url>
-        <tag>HEAD</tag>
-    </scm>
 
     <build>
         <pluginManagement>
