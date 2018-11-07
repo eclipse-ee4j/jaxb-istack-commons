@@ -17,7 +17,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.4</version>
     </parent>
 
     <groupId>com.sun.istack</groupId>
@@ -50,11 +50,6 @@
         </developer>
     </developers>
 
-    <organization>
-        <name>Oracle Corporation</name>
-        <url>http://www.oracle.com/</url>
-    </organization>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jaxb-istack-commons/issues</url>
@@ -70,6 +65,16 @@
         </mailingList>
     </mailingLists>
 
+    <properties>
+        <findbugs.skip>false</findbugs.skip>
+        <findbugs.threshold>Low</findbugs.threshold>
+        <findbugs.exclude>exclude.xml</findbugs.exclude>
+        <netbeans.hint.jdkPlatform>JDK_1.7</netbeans.hint.jdkPlatform>
+        <maven.api.version>3.5.2</maven.api.version>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
+        <vendor.name>Eclipse Implementation of JAXB</vendor.name>
+    </properties>
+
     <modules>
         <module>buildtools</module>
         <module>runtime</module>
@@ -83,6 +88,32 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>copy-sources</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${legal.doc.source}</directory>
+                                        <includes>
+                                            <include>LICENSE.md</include>
+                                            <include>NOTICE.md</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
@@ -212,11 +243,11 @@
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>3.5.1</version>
                     <configuration>
-                        <archive>
-                            <manifest>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            </manifest>
-                        </archive>
+                        <instructions>
+                            <Implementation-Vendor>${vendor.name}</Implementation-Vendor>
+                            <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+                            <_noee>true</_noee>
+                        </instructions>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -274,13 +305,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <properties>
-        <findbugs.skip>false</findbugs.skip>
-        <findbugs.threshold>Low</findbugs.threshold>
-        <findbugs.exclude>exclude.xml</findbugs.exclude>
-        <netbeans.hint.jdkPlatform>JDK_1.7</netbeans.hint.jdkPlatform>
-        <maven.api.version>3.5.2</maven.api.version>
-    </properties>
 
 </project>
