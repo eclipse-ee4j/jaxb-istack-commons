@@ -39,7 +39,7 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         <manifestEntries>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${project.version}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                         </manifestEntries>
                     </archive>
                 </configuration>

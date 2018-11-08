@@ -73,7 +73,7 @@
         <maven.api.version>3.5.2</maven.api.version>
         <resolver.version>1.1.1</resolver.version>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <vendor.name>Eclipse Implementation of JAXB</vendor.name>
+        <vendor.name>Oracle Corporation</vendor.name>
     </properties>
 
     <modules>
@@ -290,34 +290,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
                     <version>1.4</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.tmatesoft.svnkit</groupId>
-                            <artifactId>svnkit</artifactId>
-                            <version>1.9.3</version>
-                            <exclusions>
-                                <exclusion>
-                                    <groupId>com.trilead</groupId>
-                                    <artifactId>trilead-ssh2</artifactId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.trilead</groupId>
-                            <artifactId>trilead-ssh2</artifactId>
-                            <version>1.0.0-build221</version>
-                        </dependency>
-                    </dependencies>
-                    <configuration>
-                        <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-                        <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                        <providerImplementations>
-                            <svn>javasvn</svn>
-                        </providerImplementations>
-                        <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-                        <revisionOnScmFailure>false</revisionOnScmFailure>
-                        <useLastCommittedRevision>true</useLastCommittedRevision>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -392,7 +364,7 @@
                         <useDefaultManifestFile>true</useDefaultManifestFile>
                         <archive>
                             <manifestEntries>
-                                <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                                <Implementation-Build-Id>${project.version}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                             </manifestEntries>
                         </archive>
                     </configuration>
@@ -474,6 +446,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
+                <configuration>
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                    <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
+                    <getRevisionOnlyOnce>false</getRevisionOnlyOnce>
+                    <revisionOnScmFailure>false</revisionOnScmFailure>
+                    <shortRevisionLength>7</shortRevisionLength>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>validate</phase>
