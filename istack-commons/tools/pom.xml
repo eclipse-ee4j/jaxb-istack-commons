@@ -22,6 +22,21 @@
 
     <name>istack common utility code tools</name>
 
+    <properties>
+        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -38,7 +53,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -56,20 +70,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.10.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <profiles>
         <profile>
