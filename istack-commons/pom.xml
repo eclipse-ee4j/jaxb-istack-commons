@@ -390,6 +390,7 @@
                         <instructions>
                             <Implementation-Vendor>${vendor.name}</Implementation-Vendor>
                             <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+                            <Implementation-Build-Id>${project.version}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                             <_noee>true</_noee>
                         </instructions>
                     </configuration>
@@ -449,7 +450,7 @@
                 <configuration>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                    <getRevisionOnlyOnce>false</getRevisionOnlyOnce>
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <revisionOnScmFailure>false</revisionOnScmFailure>
                     <shortRevisionLength>7</shortRevisionLength>
                 </configuration>
