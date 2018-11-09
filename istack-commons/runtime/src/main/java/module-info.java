@@ -11,7 +11,7 @@
 module com.sun.istack.runtime {
     requires java.logging;
     requires transitive java.xml;
-    requires transitive java.activation;
+    requires transitive jakarta.activation;
 
     exports com.sun.istack;
     exports com.sun.istack.localization;
