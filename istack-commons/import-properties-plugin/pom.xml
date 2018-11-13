@@ -32,7 +32,6 @@
     <properties>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-        <netbeans.hint.jdkPlatform>@@DEFAU:T@@</netbeans.hint.jdkPlatform>
     </properties>
 
     <dependencies>      
