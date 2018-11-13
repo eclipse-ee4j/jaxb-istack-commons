@@ -22,6 +22,21 @@
 
     <name>istack common utility code tools</name>
 
+    <properties>
+        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -29,16 +44,12 @@
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        <manifestEntries>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -57,20 +68,6 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.10.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <profiles>
         <profile>
             <id>jdk9-setup</id>
@@ -86,9 +83,6 @@
                             <execution>
                                 <id>default-compile</id>
                                 <configuration>
-                                    <jdkToolchain>
-                                        <version>9</version>
-                                    </jdkToolchain>
                                     <source>9</source>
                                     <target>9</target>
                                     <includes>
@@ -104,9 +98,6 @@
                                 <configuration>
                                     <source>1.7</source>
                                     <target>1.7</target>
-                                    <jdkToolchain>
-                                        <version>1.7</version>
-                                    </jdkToolchain>
                                     <excludes>
                                         <exclude>module-info.java</exclude>
                                     </excludes>
@@ -122,36 +113,19 @@
                                 <_failok>true</_failok>
                             </instructions>
                         </configuration>
-                   </plugin>
-                    <!--TODO remove after javadoc-plugin 3.0.0 is released, see https://issues.apache.org/jira/browse/MJAVADOC-498 -->
+                    </plugin>
+                    <!-- Required for org.apache.tools.ant packages. -->
                     <plugin>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
                             <additionalJOptions>
                                 <additionalJOption>--add-reads</additionalJOption>
                                 <additionalJOption>com.sun.istack.tools=ALL-UNNAMED</additionalJOption>
-                                <additionalJOption>--module-path</additionalJOption>
-                                <additionalJOption>${project.build.directory}/mods</additionalJOption>
                             </additionalJOptions>
                         </configuration>
                     </plugin>
-                    <!--TODO remove after javadoc-plugin 3.0.0 is released, see https://issues.apache.org/jira/browse/MJAVADOC-498 -->
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/mods</outputDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-               </plugins>
+                </plugins>
             </build>
-      </profile>
+        </profile>
     </profiles>
 </project>

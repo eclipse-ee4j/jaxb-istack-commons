@@ -52,6 +52,7 @@
                             <goal>rs-gen</goal>
                         </goals>
                         <configuration>
+                            <atGenerated>false</atGenerated>
                             <resources>
                                 <directory>${project.basedir}/src/main/resources</directory>
                             </resources>
