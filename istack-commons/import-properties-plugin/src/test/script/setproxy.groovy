@@ -26,6 +26,7 @@ if (settings?.proxies) {
             new Node(p, "port", proxy.port)
             if (proxy.username) {new Node(p, "username", proxy.username)}
             if (proxy.password) {new Node(p, "password", proxy.password)}
+            if (proxy.id) {new Node(p, "id", proxy.id)} else {new Node(p, "id", proxy.protocol)}
             new Node(p, "host", proxy.host)
             new Node(p, "active", proxy.active)
             new Node(p, "nonProxyHosts", proxy.nonProxyHosts)

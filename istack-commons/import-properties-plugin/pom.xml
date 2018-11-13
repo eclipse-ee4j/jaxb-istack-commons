@@ -32,13 +32,10 @@
     <properties>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <legal.doc.source>${project.basedir}/../..</legal.doc.source>
+        <netbeans.hint.jdkPlatform>@@DEFAU:T@@</netbeans.hint.jdkPlatform>
     </properties>
 
     <dependencies>      
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-compat</artifactId>
-        </dependency>      
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
@@ -56,52 +53,12 @@
             <artifactId>maven-plugin-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-settings</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.sisu</groupId>
-            <artifactId>org.eclipse.sisu.inject</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven.resolver</groupId>
             <artifactId>maven-resolver-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-spi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-transport-file</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-connector-basic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.resolver</groupId>
-            <artifactId>maven-resolver-transport-wagon</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-http-lightweight</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
         </dependency>
     </dependencies>
 
@@ -155,4 +112,88 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>ittest</id>
+            <activation>
+                <property>
+                    <name>ittest</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmaven</groupId>
+                        <artifactId>gmaven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>set-proxy</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <source>${project.basedir}/src/test/script/setproxy.groovy</source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-invoker-plugin</artifactId>
+                        <configuration>
+                            <localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>
+                            <streamLogs>true</streamLogs>
+                            <addTestClassPath>true</addTestClassPath>
+                            <settingsFile>${project.build.directory}/it-settings.xml</settingsFile>
+                            <mavenOpts>${ittest-proxy}</mavenOpts>
+                            <properties>
+                                <resgen.plugin.version>${project.version}</resgen.plugin.version>
+                            </properties>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test-installdeps</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <projectsDirectory>src/test/it</projectsDirectory>
+                                    <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>integration-test-verify</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemPropertyVariables>
+                                        <it.projects.dir>${project.build.directory}/it</it.projects.dir>
+                                    </systemPropertyVariables>
+                                    <encoding>${project.build.sourceEncoding}</encoding>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
