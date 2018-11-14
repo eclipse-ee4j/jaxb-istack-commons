@@ -12,17 +12,15 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.sun.istack</groupId>
-        <artifactId>istack-commons</artifactId>
-        <version>3.0.8-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
-    <artifactId>istack-commons-buildtools</artifactId>
-    <name>istack-commons-buildtools</name>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sun.istack</groupId>
+    <artifactId>istack-commons</artifactId>
+    <version>3.0.8-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>istack-commons-buildtools</artifactId>
+  <name>istack-commons-buildtools</name>
 
     <properties>
         <legal.doc.source>${project.basedir}/../..</legal.doc.source>
@@ -46,7 +44,7 @@
             <artifactId>ant</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sun.codemodel</groupId>
+            <groupId>org.glassfish.jaxb</groupId>
             <artifactId>codemodel</artifactId>
         </dependency>
     </dependencies>
