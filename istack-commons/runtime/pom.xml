@@ -23,10 +23,6 @@
 
     <name>istack common utility code runtime</name>
 
-    <properties>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
