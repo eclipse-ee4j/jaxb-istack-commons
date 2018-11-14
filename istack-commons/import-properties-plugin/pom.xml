@@ -31,7 +31,6 @@
 
     <properties>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
     </properties>
 
     <dependencies>      
