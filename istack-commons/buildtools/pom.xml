@@ -46,7 +46,7 @@
             <artifactId>ant</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sun.codemodel</groupId>
+            <groupId>org.glassfish.jaxb</groupId>
             <artifactId>codemodel</artifactId>
         </dependency>
     </dependencies>
