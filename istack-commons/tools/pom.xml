@@ -22,10 +22,6 @@
 
     <name>istack common utility code tools</name>
 
-    <properties>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.ant</groupId>
