@@ -68,9 +68,6 @@
                                 <configuration>
                                     <source>9</source>
                                     <target>9</target>
-                                    <includes>
-                                        <include>module-info.java</include>
-                                    </includes>
                                </configuration>
                             </execution>
                             <execution>
