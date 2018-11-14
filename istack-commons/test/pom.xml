@@ -22,10 +22,6 @@
 
   <name>istack common utility code test</name>
 
-  <properties>
-      <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-  </properties>
-
   <build>
       <sourceDirectory>src</sourceDirectory>
   </build>

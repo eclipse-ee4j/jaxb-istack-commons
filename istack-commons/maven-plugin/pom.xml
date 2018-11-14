@@ -25,10 +25,6 @@
     <name>istack-commons Maven Mojo</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>

@@ -24,10 +24,6 @@
     <artifactId>istack-commons-buildtools</artifactId>
     <name>istack-commons-buildtools</name>
 
-    <properties>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
-    </properties>
-
     <build>
         <sourceDirectory>src</sourceDirectory>
 
