@@ -23,16 +23,21 @@
 
     <name>istack common utility code runtime</name>
 
+    <properties>
+        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
+    </properties>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        <manifestEntries>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
@@ -41,10 +46,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -63,9 +70,6 @@
                             <execution>
                                 <id>default-compile</id>
                                 <configuration>
-                                    <jdkToolchain>
-                                        <version>9</version>
-                                    </jdkToolchain>
                                     <source>9</source>
                                     <target>9</target>
                                     <includes>
@@ -81,9 +85,6 @@
                                 <configuration>
                                     <source>1.7</source>
                                     <target>1.7</target>
-                                    <jdkToolchain>
-                                        <version>1.7</version>
-                                    </jdkToolchain>
                                     <excludes>
                                         <exclude>module-info.java</exclude>
                                     </excludes>
@@ -91,16 +92,11 @@
                             </execution>
                         </executions>
                     </plugin>
-                   <plugin>
+                    <plugin>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>maven-bundle-plugin</artifactId>
-                        <configuration>
-                            <instructions>
-                                <_failok>true</_failok>
-                            </instructions>
-                        </configuration>
                     </plugin>
-               </plugins>
+                </plugins>
             </build>
       </profile>
     </profiles>
