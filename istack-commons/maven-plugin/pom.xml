@@ -23,7 +23,6 @@
     <artifactId>istack-commons-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>istack-commons Maven Mojo</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>
@@ -32,7 +31,15 @@
         </dependency>
         <dependency>
             <groupId>org.apache.maven.resolver</groupId>
+            <artifactId>maven-resolver-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.resolver</groupId>
             <artifactId>maven-resolver-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
@@ -41,10 +48,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>file-management</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>

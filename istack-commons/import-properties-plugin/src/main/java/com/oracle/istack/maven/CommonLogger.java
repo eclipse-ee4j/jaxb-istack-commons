@@ -11,7 +11,6 @@
 package com.oracle.istack.maven;
 
 import org.apache.maven.plugin.logging.Log;
-import org.codehaus.plexus.logging.Logger;
 
 /**
  *
@@ -19,30 +18,21 @@ import org.codehaus.plexus.logging.Logger;
  */
 public class CommonLogger {
 
-    private Log log;
-    private Logger logger;
-    
+    private final Log log;
+
     public CommonLogger(Log log) {
         this.log = log;
     }
-    
-    public CommonLogger(Logger logger) {
-        this.logger = logger;
-    }
-    
+
     public void warn(String s) {
         if (log != null) {
             log.warn(s);
-        } else {
-            logger.warn(s);
         }
     }
-    
+
     public void info(String s) {
         if (log != null) {
             log.info(s);
-        } else {
-            logger.info(s);
         }
     }
 }
