@@ -159,8 +159,6 @@ public class ResourceGenMojo extends AbstractMojo {
         JCodeModel cm = new JCodeModel();
 
         for (Path p : includedFiles) {
-            getLog().info("Path "+p);
-
             File res = resources.resolve(p).toFile();
             String value = p.toString();
 
