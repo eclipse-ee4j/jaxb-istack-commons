@@ -37,20 +37,20 @@ import java.util.logging.Logger;
  * @author Martin Grebac
  */
 public class PropertyResolver {
-    
+
     private final CommonLogger logger;
-    
+
     private final MavenXpp3Reader mavenreader = new MavenXpp3Reader();
 
     private final Properties properties;
 
     private final RepositorySystemSession repoSession;
-    
+
     private final RepositorySystem repoSystem;
-    
+
     private final List<RemoteRepository> pluginRepos;
-    
-    PropertyResolver(CommonLogger logger, Properties properties, RepositorySystemSession session, 
+
+    PropertyResolver(CommonLogger logger, Properties properties, RepositorySystemSession session,
             RepositorySystem repoSystem, List<RemoteRepository> pluginRepositories) {
         this.logger = logger;
         this.properties = properties;
@@ -58,7 +58,7 @@ public class PropertyResolver {
         this.repoSystem = repoSystem;
         this.pluginRepos = pluginRepositories;
     }
-            
+
     /**
      *
      * @param project maven project
@@ -68,7 +68,7 @@ public class PropertyResolver {
      */
     public void resolveProperties(MavenProject project) throws FileNotFoundException, IOException, XmlPullParserException {
         logger.info("Resolving properties for " + project.getGroupId() + ":" + project.getArtifactId());
- 
+
         Model model = null;
         FileReader reader;
         try {
@@ -81,7 +81,7 @@ public class PropertyResolver {
         }
         MavenProject loadedProject = new MavenProject(model);
 
-        DependencyManagement dm = loadedProject.getDependencyManagement();        
+        DependencyManagement dm = loadedProject.getDependencyManagement();
         if (dm == null) {
             logger.warn("No dependency management section found in: "  + loadedProject.getGroupId() + ":" + loadedProject.getArtifactId());
             return;
@@ -102,7 +102,7 @@ public class PropertyResolver {
                     d.setVersion(version);
                     d.setType("pom");
                     d.setClassifier("pom");
-                    result = DependencyResolver.resolve(d, pluginRepos, repoSystem, repoSession);                                        
+                    result = DependencyResolver.resolve(d, pluginRepos, repoSystem, repoSession);
                     Artifact a = result.getArtifactResults().get(0).getArtifact();
                     reader = new FileReader(a.getFile());
                     Model m = mavenreader.read(reader);
@@ -118,8 +118,8 @@ public class PropertyResolver {
                     Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }        
+        }
     }
 
-    
+
 }

@@ -52,7 +52,6 @@
                             <goal>rs-gen</goal>
                         </goals>
                         <configuration>
-                            <atGenerated>false</atGenerated>
                             <resources>
                                 <directory>${project.basedir}/src/main/resources</directory>
                             </resources>
@@ -67,9 +66,6 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <excludes>
-                        <exclude>module-info.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

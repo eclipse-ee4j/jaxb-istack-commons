@@ -31,15 +31,13 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.shared.model.fileset.FileSet;
-import org.apache.maven.shared.model.fileset.util.FileSetManager;
-import org.codehaus.plexus.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +70,7 @@ public class ResourceGenMojo extends AbstractMojo {
      * File set of the properties files to be processed.
      */
     @Parameter
-    private FileSet resources;
+    private RSFileSet resources;
 
     /**
      * Directory with properties files to be processed from the command line.
@@ -98,7 +96,7 @@ public class ResourceGenMojo extends AbstractMojo {
      * Mark generated sources with {@code @javax.annotation.Generated}.
      * @since 3.0.5
      */
-    @Parameter(property = "atGenerated", defaultValue = "true")
+    @Parameter(property = "atGenerated", defaultValue = "false")
     private boolean atGenerated;
 
     /**
@@ -136,16 +134,14 @@ public class ResourceGenMojo extends AbstractMojo {
             throw new MojoExecutionException("Cannot write to destdir");
         }
 
-        if (StringUtils.isEmpty(encoding)) {
+        if (encoding == null || encoding.trim().isEmpty()) {
             encoding =  System.getProperty("file.encoding");
             getLog().warn("File encoding has not been set, using platform encoding "
                     + encoding + ", i.e. build is platform dependent!");
         }
 
-        FileSetManager fileSetManager = new FileSetManager();
-
         if (resources == null) {
-            FileSet fs = new FileSet();
+            RSFileSet fs = new RSFileSet();
             fs.setDirectory(System.getProperty("user.dir"));
             List<String> l = new ArrayList<>();
             l.add(cliResource);
@@ -153,40 +149,33 @@ public class ResourceGenMojo extends AbstractMojo {
             resources = fs;
         }
 
-        String[] includedFiles = fileSetManager.getIncludedFiles(resources);
+        List<Path> includedFiles = resources.getIncludedFiles();
 
         getLog().info("Resources:");
-        for(String s : includedFiles) {
-            getLog().info(s);
+        for(Path s : includedFiles) {
+            getLog().info(s.toString());
         }
 
         JCodeModel cm = new JCodeModel();
 
-        for (String value : includedFiles) {
-
-            File res;
-
-            if (null == resources.getDirectory()) {
-                res = new File(value);
-            } else {
-                res = new File(resources.getDirectory(), value);
-            }
-
-            if(res.getName().contains("_"))
-                continue;   // this is a localized bundle, so ignore.
+        for (Path p : includedFiles) {
+            File res = resources.resolve(p).toFile();
+            String value = p.toString();
 
             String className = getClassName(res);
 
             String bundleName = value.substring(0, value.lastIndexOf('.')).replace('/', '.').replace('\\', '.');// cut off '.properties'
             String dirName = bundleName.substring(0, bundleName.lastIndexOf('.'));
 
-            File destFile = new File(new File(destDir,dirName.replace('.','/')),className+".java");
+            File destFile = destDir.toPath().resolve(dirName.replace('.', '/')).resolve(className+".java").toFile();
             if(destFile.exists() && (destFile.lastModified() >= res.lastModified())) {
                 getLog().info("Skipping " + res);
                 continue;
             }
 
             getLog().info("Processing "+res);
+
+            destFile.getParentFile().mkdirs();
             JPackage pkg = cm._package(dirName);
 
             Properties props = new Properties();
