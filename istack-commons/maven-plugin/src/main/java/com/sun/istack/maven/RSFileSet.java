@@ -11,6 +11,7 @@
 package com.sun.istack.maven;
 
 import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import static java.nio.file.FileVisitResult.CONTINUE;
@@ -67,16 +68,17 @@ public class RSFileSet {
         if (inc.isEmpty()) {
             inc.add("**");
         }
+        FileSystem fs = FileSystems.getDefault();
         for (final String i : inc) {
             int idx = i.indexOf('/');
             final PathMatcher matcher;
             final PathMatcher dirMatcher;
-            if (idx < 0 ) {
-                matcher = FileSystems.getDefault().getPathMatcher("glob:" + i);
+            if (idx < 0) {
+                matcher = fs.getPathMatcher("glob:" + i);
                 dirMatcher = null;
             } else {
-                matcher = FileSystems.getDefault().getPathMatcher("glob:" + i.substring(idx + 1));
-                dirMatcher = FileSystems.getDefault().getPathMatcher("glob:" + i.substring(0, idx));
+                matcher = fs.getPathMatcher("glob:" + i.substring(idx + 1));
+                dirMatcher = fs.getPathMatcher("glob:" + i.substring(0, idx));
             }
             try {
                 Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
@@ -84,10 +86,10 @@ public class RSFileSet {
                     @Override
                     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                         if (dirMatcher == null || (dirMatcher.matches(file.getParent()))) {
-                        Path name = file.getFileName();
-                        if (name != null && matcher.matches(name) && !exMatcher.matches(name)) {
-                            result.add(root.relativize(file));
-                        }
+                            Path name = file.getFileName();
+                            if (name != null && matcher.matches(name) && !exMatcher.matches(name)) {
+                                result.add(root.relativize(file));
+                            }
                         }
                         return CONTINUE;
                     }
