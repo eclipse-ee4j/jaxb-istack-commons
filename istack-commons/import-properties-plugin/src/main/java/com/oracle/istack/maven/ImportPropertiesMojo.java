@@ -43,7 +43,7 @@ public class ImportPropertiesMojo extends AbstractMojo {
      */
     @Component
     protected MavenProject project;
-    
+
     /**
      * The entry point to Aether, i.e. the component doing all the work.
      *
@@ -51,7 +51,7 @@ public class ImportPropertiesMojo extends AbstractMojo {
      */
     @Component
     private RepositorySystem repoSystem;
-    
+
     /**
      * The current repository/network configuration of Maven.
      *
@@ -70,17 +70,17 @@ public class ImportPropertiesMojo extends AbstractMojo {
     private List<RemoteRepository> projectRepos;
 
     private Properties projectProperties = null;
-    
+
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            projectProperties = project.getProperties();  
+            projectProperties = project.getProperties();
 
             MavenProject bomProject = project;
             while (bomProject != null && !bomProject.getArtifactId().endsWith("-bom")) {
                 bomProject = bomProject.getParent();
             }
-                        
+
             if (bomProject == null || !bomProject.getArtifactId().endsWith("-bom")) {
                 getLog().warn("No '*-bom' project found in project hierarchy, using this project's pom for import search.");
                 bomProject = project;
@@ -90,7 +90,7 @@ public class ImportPropertiesMojo extends AbstractMojo {
 
             PropertyResolver resolver = new PropertyResolver(new CommonLogger(getLog()), projectProperties, repoSession, repoSystem, projectRepos);
             resolver.resolveProperties(bomProject);
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
