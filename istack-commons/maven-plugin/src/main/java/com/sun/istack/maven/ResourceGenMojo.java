@@ -140,13 +140,18 @@ public class ResourceGenMojo extends AbstractMojo {
                     + encoding + ", i.e. build is platform dependent!");
         }
 
-        if (resources == null) {
+        if (resources == null && cliResource != null) {
             RSFileSet fs = new RSFileSet();
             fs.setDirectory(System.getProperty("user.dir"));
             List<String> l = new ArrayList<>();
             l.add(cliResource);
             fs.setIncludes(l);
             resources = fs;
+        }
+
+        if (!resources.exists()) {
+            getLog().info("No resources specified.");
+            return;
         }
 
         List<Path> includedFiles = resources.getIncludedFiles();

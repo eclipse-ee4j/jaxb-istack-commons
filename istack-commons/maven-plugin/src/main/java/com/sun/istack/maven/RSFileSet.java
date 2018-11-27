@@ -16,6 +16,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import static java.nio.file.FileVisitResult.CONTINUE;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
@@ -47,6 +48,9 @@ public class RSFileSet {
         return root.toString();
     }
 
+    public boolean exists() {
+        return Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS);
+    }
     public void addInclude(String include) {
         inc.add(include);
     }
