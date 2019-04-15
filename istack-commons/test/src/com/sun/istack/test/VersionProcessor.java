@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,12 +10,11 @@
 
 package com.sun.istack.test;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Represents a range of versions.
@@ -58,17 +57,17 @@ public final class VersionProcessor {
     }
 
     public VersionProcessor( String sinceValue, String untilValue, String excludeFromValue ) {
-        if( sinceValue!=null )
+        if( sinceValue!=null && !sinceValue.trim().isEmpty())
             since = new VersionNumber( sinceValue );
         else
             since = null;
 
-        if( untilValue!=null )
+        if( untilValue!=null && !untilValue.trim().isEmpty())
             until = new VersionNumber( untilValue );
         else
             until = null;
 
-        if( excludeFromValue!=null ) {
+        if( excludeFromValue!=null && !excludeFromValue.trim().isEmpty()) {
             excludeVersions = new HashSet<Object>();
             String v = excludeFromValue.trim();
             if(v.equals("all")) {
@@ -83,14 +82,11 @@ public final class VersionProcessor {
     }
 
     public VersionProcessor( Document testSpecMeta ) {
-        this(testSpecMeta.getRootElement());
+        this(testSpecMeta.getDocumentElement());
     }
 
     public VersionProcessor( Element e ) {
-        this(
-            e.attributeValue("since",null),
-            e.attributeValue("until",null),
-            e.attributeValue("excludeFrom",null) );
+        this(e.getAttribute("since"), e.getAttribute("until"), e.getAttribute("excludeFrom"));
     }
 
     /**
