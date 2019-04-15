@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -149,7 +149,7 @@ public class ResourceGenMojo extends AbstractMojo {
             resources = fs;
         }
 
-        if (!resources.exists()) {
+        if (resources == null || !resources.exists()) {
             getLog().info("No resources specified.");
             return;
         }
@@ -180,7 +180,11 @@ public class ResourceGenMojo extends AbstractMojo {
 
             getLog().info("Processing "+res);
 
-            destFile.getParentFile().mkdirs();
+            if (!destFile.getParentFile().mkdirs()) {
+                if (getLog().isDebugEnabled()) {
+                    getLog().debug("Reusing existing " + destFile.getParentFile().getAbsolutePath() + " directory.");
+                }
+            }
             JPackage pkg = cm._package(dirName);
 
             Properties props = new Properties();
