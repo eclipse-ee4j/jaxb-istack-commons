@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -66,13 +66,15 @@ public class ParallelWorldClassLoaderTest {
         Class c1,c2;
         try {
             c1 = Class.forName("javax.xml.ws.Service", false, pwcl);
-            Assert.assertEquals(c1.getDeclaredMethods().length, 1);
+            // jacoco adds method '$jacocoInit' so there can be at most two
+            Assert.assertTrue(c1.getDeclaredMethods().length < 3);
         } catch (ClassNotFoundException cnfe) {
             Assert.fail();
         }
         try {
             c2 = Class.forName("javax.xml.ws.Service", false, Thread.currentThread().getContextClassLoader());
-            Assert.assertEquals(c2.getDeclaredMethods().length, 1);
+            // jacoco adds method '$jacocoInit' so there can be at most two
+            Assert.assertTrue(c2.getDeclaredMethods().length < 3);
         } catch (ClassNotFoundException cnfe) {
             Assert.fail();
         }
