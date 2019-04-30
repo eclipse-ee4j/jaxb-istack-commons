@@ -73,6 +73,7 @@
         <spotbugs.exclude>exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
+        <spotbugs.version>3.1.11</spotbugs.version>
 
         <maven.api.version>3.5.2</maven.api.version>
         <resolver.version>1.1.1</resolver.version>
@@ -101,7 +102,6 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.ant</groupId>
@@ -183,7 +183,6 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>6.14.2</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
@@ -224,6 +223,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -244,25 +244,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.7</version>
-                    <configuration>
-                        <formats>
-                            <format>xml</format>
-                        </formats>
-                        <check>
-                            <totalLineRate>45</totalLineRate>
-                            <packageLineRate>45</packageLineRate>
-                            <haltOnFailure>true</haltOnFailure>
-                        </check>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
@@ -281,7 +262,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>3.1.11</version>
+                    <version>${spotbugs.version}</version>
                     <configuration>
                         <skip>${spotbugs.skip}</skip>
                         <threshold>${spotbugs.threshold}</threshold>
@@ -300,48 +281,39 @@
                         <useDefaultManifestFile>true</useDefaultManifestFile>
                         <archive>
                             <manifestEntries>
-                                <Implementation-Build-Id>${project.version}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                                <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                             </manifestEntries>
                         </archive>
                     </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>3.1.1</version>
                     <configuration>
-                        <deployAtEnd>true</deployAtEnd>
-                        <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+                        <excludes>
+                            <exclude>META-INF/jpms.args</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.5.1</version>
+                    <version>4.2.0</version>
                     <configuration>
                         <instructions>
                             <Implementation-Vendor>${vendor.name}</Implementation-Vendor>
                             <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
-                            <Implementation-Build-Id>${project.version}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                             <_noee>true</_noee>
                         </instructions>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.1.0</version>
                     <configuration>
-                        <detectJavaApiLink>false</detectJavaApiLink>
+                        <release>11</release>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -362,22 +334,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-invoker-plugin</artifactId>
-                    <version>2.0.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.19.1</version>
+                    <version>3.0.0-M3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.5</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.plexus</groupId>
-                    <artifactId>plexus-component-metadata</artifactId>
-                    <version>1.5.5</version>
+                    <version>3.6.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -389,7 +356,6 @@
                 <configuration>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <revisionOnScmFailure>false</revisionOnScmFailure>
                     <shortRevisionLength>7</shortRevisionLength>
                 </configuration>
@@ -452,7 +418,84 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!--compile all as JPMS module-->
+                        <id>default-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>9</source>
+                            <target>9</target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!--replace classes with source/target 7-->
+                        <id>base-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <release>7</release>
+                            <excludes>
+                                <exclude>module-info.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!--compile test classes with source/target 7-->
+                        <id>default-testCompile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <release>11</release>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>jacoco-maven-plugin</artifactId>
+                            <version>0.8.3</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>default-report</id>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
