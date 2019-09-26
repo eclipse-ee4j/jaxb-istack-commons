@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -111,168 +111,168 @@ public class Logger {
         if (!this.logger.isLoggable(level)) {
             return;
         }
-        logger.logp(level, componentClassName, getCallerMethodName(), message);
+        logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void log(final Level level, final String message, Object param1) {
         if (!this.logger.isLoggable(level)) {
             return;
         }
-        logger.logp(level, componentClassName, getCallerMethodName(), message, param1);
+        logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), message, param1);
     }
 
     public void log(final Level level, final String message, Object[] params) {
         if (!this.logger.isLoggable(level)) {
             return;
         }
-        logger.logp(level, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void log(final Level level, final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(level)) {
             return;
         }
-        logger.logp(level, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void finest(final String message) {
         if (!this.logger.isLoggable(Level.FINEST)) {
             return;
         }
-        logger.logp(Level.FINEST, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.FINEST, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void finest(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.FINEST)) {
             return;
         }
-        logger.logp(Level.FINEST, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.FINEST, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
     
     public void finest(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.FINEST)) {
             return;
         }
-        logger.logp(Level.FINEST, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.FINEST, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void finer(final String message) {
         if (!this.logger.isLoggable(Level.FINER)) {
             return;
         }
-        logger.logp(Level.FINER, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.FINER, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void finer(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.FINER)) {
             return;
         }
-        logger.logp(Level.FINER, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.FINER, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void finer(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.FINER)) {
             return;
         }
-        logger.logp(Level.FINER, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.FINER, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void fine(final String message) {
         if (!this.logger.isLoggable(Level.FINE)) {
             return;
         }
-        logger.logp(Level.FINE, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.FINE, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void fine(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.FINE)) {
             return;
         }
-        logger.logp(Level.FINE, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.FINE, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void info(final String message) {
         if (!this.logger.isLoggable(Level.INFO)) {
             return;
         }
-        logger.logp(Level.INFO, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.INFO, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void info(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.INFO)) {
             return;
         }
-        logger.logp(Level.INFO, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.INFO, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void info(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.INFO)) {
             return;
         }
-        logger.logp(Level.INFO, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.INFO, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void config(final String message) {
         if (!this.logger.isLoggable(Level.CONFIG)) {
             return;
         }
-        logger.logp(Level.CONFIG, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.CONFIG, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void config(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.CONFIG)) {
             return;
         }
-        logger.logp(Level.CONFIG, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.CONFIG, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void config(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.CONFIG)) {
             return;
         }
-        logger.logp(Level.CONFIG, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.CONFIG, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void warning(final String message) {
         if (!this.logger.isLoggable(Level.WARNING)) {
             return;
         }
-        logger.logp(Level.WARNING, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.WARNING, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void warning(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.WARNING)) {
             return;
         }
-        logger.logp(Level.WARNING, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.WARNING, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void warning(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.WARNING)) {
             return;
         }
-        logger.logp(Level.WARNING, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.WARNING, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public void severe(final String message) {
         if (!this.logger.isLoggable(Level.SEVERE)) {
             return;
         }
-        logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), message);
+        logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), message);
     }
 
     public void severe(final String message, Object[] params) {
         if (!this.logger.isLoggable(Level.SEVERE)) {
             return;
         }
-        logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), message, params);
+        logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), message, params);
     }
 
     public void severe(final String message, final Throwable thrown) {
         if (!this.logger.isLoggable(Level.SEVERE)) {
             return;
         }
-        logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), message, thrown);
+        logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), message, thrown);
     }
 
     public boolean isMethodCallLoggable() {
@@ -292,7 +292,7 @@ public class Logger {
             return;
         }
 
-        logger.entering(componentClassName, getCallerMethodName());
+        logger.entering(componentClassName, StackHelper.getCallerMethodName());
     }
 
     public void entering(final Object... parameters) {
@@ -300,21 +300,21 @@ public class Logger {
             return;
         }
 
-        logger.entering(componentClassName, getCallerMethodName(), parameters);
+        logger.entering(componentClassName, StackHelper.getCallerMethodName(), parameters);
     }
 
     public void exiting() {
         if (!this.logger.isLoggable(METHOD_CALL_LEVEL_VALUE)) {
             return;
         }
-        logger.exiting(componentClassName, getCallerMethodName());
+        logger.exiting(componentClassName, StackHelper.getCallerMethodName());
     }
 
     public void exiting(final Object result) {
         if (!this.logger.isLoggable(METHOD_CALL_LEVEL_VALUE)) {
             return;
         }
-        logger.exiting(componentClassName, getCallerMethodName(), result);
+        logger.exiting(componentClassName, StackHelper.getCallerMethodName(), result);
     }
 
     /**
@@ -335,10 +335,10 @@ public class Logger {
     public <T extends Throwable> T logSevereException(final T exception, final Throwable cause) {
         if (this.logger.isLoggable(Level.SEVERE)) {
             if (cause == null) {
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             } else {
                 exception.initCause(cause);
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage(), cause);
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), cause);
             }
         }
 
@@ -366,9 +366,9 @@ public class Logger {
     public <T extends Throwable> T logSevereException(final T exception, final boolean logCause) {
         if (this.logger.isLoggable(Level.SEVERE)) {
             if (logCause && exception.getCause() != null) {
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage(), exception.getCause());
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), exception.getCause());
             } else {
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             }
         }
 
@@ -381,9 +381,9 @@ public class Logger {
     public <T extends Throwable> T logSevereException(final T exception) {
         if (this.logger.isLoggable(Level.SEVERE)) {
             if (exception.getCause() == null) {
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             } else {
-                logger.logp(Level.SEVERE, componentClassName, getCallerMethodName(), exception.getMessage(), exception.getCause());
+                logger.logp(Level.SEVERE, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), exception.getCause());
             }
         }
 
@@ -409,10 +409,10 @@ public class Logger {
     public <T extends Throwable> T logException(final T exception, final Throwable cause, final Level level) {
         if (this.logger.isLoggable(level)) {
             if (cause == null) {
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             } else {
                 exception.initCause(cause);
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage(), cause);
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), cause);
             }
         }
 
@@ -441,9 +441,9 @@ public class Logger {
     public <T extends Throwable> T logException(final T exception, final boolean logCause, final Level level) {
         if (this.logger.isLoggable(level)) {
             if (logCause && exception.getCause() != null) {
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage(), exception.getCause());
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), exception.getCause());
             } else {
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             }
         }
 
@@ -457,44 +457,13 @@ public class Logger {
     public <T extends Throwable> T logException(final T exception, final Level level) {
         if (this.logger.isLoggable(level)) {
             if (exception.getCause() == null) {
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage());
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage());
             } else {
-                logger.logp(level, componentClassName, getCallerMethodName(), exception.getMessage(), exception.getCause());
+                logger.logp(level, componentClassName, StackHelper.getCallerMethodName(), exception.getMessage(), exception.getCause());
             }
         }
 
         return exception;
-    }
-
-    /**
-     * Function returns the name of the caller method for the method executing this
-     * function.
-     *
-     * @return caller method name from the call stack of the current {@link Thread}.
-     */
-    private static String getCallerMethodName() {
-        return getStackMethodName(5);
-    }
-
-    /**
-     * Method returns the name of the method that is on the {@code methodIndexInStack}
-     * position in the call stack of the current {@link Thread}.
-     *
-     * @param methodIndexInStack index to the call stack to get the method name for.
-     * @return the name of the method that is on the {@code methodIndexInStack}
-     *         position in the call stack of the current {@link Thread}.
-     */
-    private static String getStackMethodName(final int methodIndexInStack) {
-        final String methodName;
-
-        final StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-        if (stack.length > methodIndexInStack + 1) {
-            methodName = stack[methodIndexInStack].getMethodName();
-        } else {
-            methodName = "UNKNOWN METHOD";
-        }
-
-        return methodName;
     }
 
 }
