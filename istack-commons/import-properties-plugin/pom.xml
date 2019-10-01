@@ -23,7 +23,7 @@
     <groupId>com.sun.istack</groupId>
     <artifactId>import-properties-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>istack-commons import properties plugin</name>
+    <name>istack common import properties plugin</name>
 
     <prerequisites>
         <maven>3.0</maven>

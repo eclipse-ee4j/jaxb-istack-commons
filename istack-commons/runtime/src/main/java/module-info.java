@@ -8,8 +8,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+/**
+ * istack-commons runtime utilities.
+ */
 module com.sun.istack.runtime {
-    requires java.logging;
+    requires transitive java.logging;
     requires transitive java.xml;
     requires static transitive jakarta.activation;
 
