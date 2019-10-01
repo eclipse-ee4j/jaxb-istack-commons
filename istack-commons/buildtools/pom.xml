@@ -22,7 +22,7 @@
     </parent>
 
     <artifactId>istack-commons-buildtools</artifactId>
-    <name>istack-commons-buildtools</name>
+    <name>istack common utility buildtools</name>
 
     <dependencies>
         <dependency>

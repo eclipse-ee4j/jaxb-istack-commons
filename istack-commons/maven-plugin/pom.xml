@@ -22,7 +22,7 @@
     <groupId>com.sun.istack</groupId>
     <artifactId>istack-commons-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>istack-commons Maven Mojo</name>
+    <name>istack common maven mojo</name>
 
     <dependencies>
         <dependency>
