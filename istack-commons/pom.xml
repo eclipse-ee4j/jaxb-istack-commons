@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,7 +17,8 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
+        <relativePath/>
     </parent>
 
     <groupId>com.sun.istack</groupId>
@@ -99,7 +100,7 @@
             <dependency>
                 <groupId>jakarta.activation</groupId>
                 <artifactId>jakarta.activation-api</artifactId>
-                <version>1.2.1</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -251,7 +252,7 @@
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
                     <artifactId>glassfish-copyright-maven-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>2.3</version>
                 </plugin>
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
@@ -261,12 +262,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
@@ -281,7 +282,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0-M3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -301,7 +302,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>3.0.0-M4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -340,7 +341,6 @@
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <configuration>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-                    <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
                     <revisionOnScmFailure>false</revisionOnScmFailure>
                     <shortRevisionLength>7</shortRevisionLength>
                 </configuration>
@@ -438,9 +438,10 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
+                        <_removeheaders>Bnd-LastModified,Built-By,Include-Resource,Private-Package</_removeheaders>
                         <Implementation-Vendor>${vendor.name}</Implementation-Vendor>
                         <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
-                        <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                        <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}</Implementation-Build-Id>
                     </instructions>
                 </configuration>
                 <executions>
@@ -467,6 +468,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <release>11</release>
+                    <notimestamp>true</notimestamp>
                 </configuration>
             </plugin>
             <plugin>
@@ -476,7 +478,7 @@
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}</Implementation-Build-Id>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -507,7 +509,7 @@
                         <plugin>
                             <groupId>org.jacoco</groupId>
                             <artifactId>jacoco-maven-plugin</artifactId>
-                            <version>0.8.4</version>
+                            <version>0.8.5</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -527,6 +529,11 @@
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>com/sun/istack/logging/StackHelper.class</exclude>
+                                    </excludes>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
