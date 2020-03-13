@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -145,17 +145,23 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
         //Calling getParent() on AntClassLoader doesn't return the - expected -
         //actual parent classloader but always the SystemClassLoader.
         if (cl instanceof AntClassLoader) {
+            ClassLoader loader = null;
             //1.8 added getConfiguredParent() to get correct 'parent' classloader
             if (System.getSecurityManager() == null) {
-                return getPCL(cl);
+                loader = getPCL(cl);
             } else {
-                return AccessController.doPrivileged(
+                loader = AccessController.doPrivileged(
                         new PrivilegedAction<ClassLoader>() {
                             public ClassLoader run() {
                                 return getPCL(cl);
                             }
                         });
             }
+            // we may be called by Gradle, in such case do not close its classloader,
+            // so Gradle can handle it itself and return null here;
+            // in other cases return parent or null if not found
+            return loader == null ? null
+                    : loader.getClass().getName().startsWith("org.gradle.") ? null : loader;
         }
         return SecureLoader.getParentClassLoader(cl);
     }
