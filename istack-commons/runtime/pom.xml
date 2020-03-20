@@ -16,7 +16,7 @@
     <parent>
         <groupId>com.sun.istack</groupId>
         <artifactId>istack-commons</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>4.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>istack-commons-runtime</artifactId>
@@ -89,10 +89,6 @@
                             !META-INF.*,
                             *
                         </Export-Package>
-                        <Import-Package>
-                            jakarta.activation;version=!,
-                            *
-                        </Import-Package>
                         <Multi-Release>true</Multi-Release>
                     </instructions>
                 </configuration>
