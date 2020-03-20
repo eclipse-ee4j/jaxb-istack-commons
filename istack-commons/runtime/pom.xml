@@ -90,7 +90,7 @@
                             *
                         </Export-Package>
                         <Import-Package>
-                            javax.activation;version=!,
+                            jakarta.activation;version=!,
                             *
                         </Import-Package>
                         <Multi-Release>true</Multi-Release>
