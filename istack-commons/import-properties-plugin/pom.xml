@@ -15,7 +15,7 @@
     <parent>
         <artifactId>istack-commons</artifactId>
         <groupId>com.sun.istack</groupId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>4.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -33,7 +33,7 @@
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
     </properties>
 
-    <dependencies>      
+    <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
@@ -136,7 +136,7 @@
                             <settingsFile>${project.build.directory}/it-settings.xml</settingsFile>
                             <mavenOpts>${ittest-proxy}</mavenOpts>
                             <properties>
-                                <resgen.plugin.version>${project.version}</resgen.plugin.version>
+                                <ip.plugin.version>${project.version}</ip.plugin.version>
                             </properties>
                         </configuration>
                         <executions>
