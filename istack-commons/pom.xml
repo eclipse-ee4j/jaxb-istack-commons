@@ -23,7 +23,7 @@
 
     <groupId>com.sun.istack</groupId>
     <artifactId>istack-commons</artifactId>
-    <version>4.0.0-M1</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>iStack Common Utility Code</name>
     <description>istack common utility code</description>
