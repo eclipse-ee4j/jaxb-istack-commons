@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -44,7 +44,7 @@ import java.util.zip.ZipFile;
  *
  * Phase: generate-sources
  */
-@Mojo(name = "metainf-services", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+@Mojo(name = "metainf-services", defaultPhase = LifecyclePhase.GENERATE_SOURCES, threadSafe = true)
 public class MetainfServicesCompilerMojo extends AbstractMojo {
 
     /**
