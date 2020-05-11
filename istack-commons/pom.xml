@@ -105,7 +105,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>4.13</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.ant</groupId>
@@ -120,7 +120,7 @@
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>codemodel</artifactId>
-                <version>2.3.2-2</version>
+                <version>3.0.0-M2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
@@ -414,11 +414,19 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${upper.java.level}</release>
-                    <compilerArguments>
-                        <Xlint:all />
-                    </compilerArguments>
                 </configuration>
                 <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <compilerArguments>
+                                <Xlint:all />
+                            </compilerArguments>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>base-compile</id>
                         <goals>
@@ -429,16 +437,6 @@
                             <excludes>
                                 <exclude>module-info.java</exclude>
                             </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!--compile test classes with source/target 11-->
-                        <id>default-testCompile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <release>11</release>
                         </configuration>
                     </execution>
                 </executions>
@@ -547,6 +545,7 @@
                                 <configuration>
                                     <excludes>
                                         <exclude>com/sun/istack/logging/StackHelper.class</exclude>
+                                        <exclude>com/sun/istack/tools/Utils.class</exclude>
                                     </excludes>
                                 </configuration>
                             </execution>
