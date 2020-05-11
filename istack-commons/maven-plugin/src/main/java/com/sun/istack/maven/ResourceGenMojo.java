@@ -57,7 +57,8 @@ import java.util.Properties;
  * RequiresProject: false
  * Phase: process-sources
  */
-@Mojo(name = "rs-gen", requiresProject = false, defaultPhase = LifecyclePhase.PROCESS_SOURCES)
+@Mojo(name = "rs-gen", requiresProject = false, threadSafe = true,
+        defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class ResourceGenMojo extends AbstractMojo {
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -33,15 +33,16 @@ import org.eclipse.aether.repository.RemoteRepository;
  * The import-properties goal imports all properties from scope-import poms
  * (boms) and sets them as project properties.
  *
- * @author <a href="mailto:martin.grebac@oracle.com">Martin Grebac</a>
+ * @author Martin Grebac
  */
-@Mojo(name = "import-pom-properties", defaultPhase = LifecyclePhase.COMPILE, requiresDependencyResolution = ResolutionScope.NONE)
+@Mojo(name = "import-pom-properties", threadSafe = true,
+        defaultPhase = LifecyclePhase.COMPILE, requiresDependencyResolution = ResolutionScope.NONE)
 public class ImportPropertiesMojo extends AbstractMojo {
 
     /**
      * The Maven Project Object.
      */
-    @Component
+    @Parameter(defaultValue = "${project}", readonly = true)
     protected MavenProject project;
 
     /**
