@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -87,8 +87,9 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
         jars = Collections.synchronizedSet(new HashSet<JarFile>());
     }
 
+    @Override
     protected Class findClass(String name) throws ClassNotFoundException {
-        
+
         StringBuffer sb = new StringBuffer(name.length()+prefix.length()+6);
         sb.append(prefix).append(name.replace('.','/')).append(".class");
 
@@ -106,7 +107,7 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
         } catch (IOException ioe) {
             throw new ClassNotFoundException(name);
         }
-        
+
         if (is==null)
             throw new ClassNotFoundException(name);
 
@@ -132,7 +133,7 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
             throw new ClassNotFoundException(name,e);
         } finally {
             try {
-                if (con != null && con instanceof JarURLConnection) {
+                if (con instanceof JarURLConnection) {
                     jars.add(((JarURLConnection) con).getJarFile());
                 }
             } catch (IOException ioe) {
@@ -154,9 +155,7 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
         if (u != null) {
             try {
                 jars.add(new JarFile(new File(toJarUrl(u).toURI())));
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(ParallelWorldClassLoader.class.getName()).log(Level.WARNING, null, ex);
-            } catch (IOException ex) {
+            } catch (URISyntaxException | IOException ex) {
                 Logger.getLogger(ParallelWorldClassLoader.class.getName()).log(Level.WARNING, null, ex);
             } catch (ClassNotFoundException ex) {
                 //ignore - not a jar
@@ -171,10 +170,8 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
         while (en.hasMoreElements()) {
             try {
                 jars.add(new JarFile(new File(toJarUrl(en.nextElement()).toURI())));
-            } catch (URISyntaxException ex) {
+            } catch (URISyntaxException | IOException ex) {
                 //should not happen
-                Logger.getLogger(ParallelWorldClassLoader.class.getName()).log(Level.WARNING, null, ex);
-            } catch (IOException ex) {
                 Logger.getLogger(ParallelWorldClassLoader.class.getName()).log(Level.WARNING, null, ex);
             } catch (ClassNotFoundException ex) {
                 //ignore - not a jar
@@ -183,14 +180,19 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
         return en;
     }
 
+    @Override
     public synchronized void close() throws IOException {
         for (JarFile jar : jars) {
             jar.close();
         }
     }
-    
+
     /**
      * Given the URL inside jar, returns the URL to the jar itself.
+     * @param res Resource in a jar
+     * @return URL to the conaining jar file
+     * @throws java.lang.ClassNotFoundException if res does not denote jar URL
+     * @throws java.net.MalformedURLException if computed URL is invalid
      */
     public static URL toJarUrl(URL res) throws ClassNotFoundException, MalformedURLException {
         String url = res.toExternalForm();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,8 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.Authenticator;
 import java.net.Authenticator.RequestorType;
 import java.net.MalformedURLException;
@@ -26,10 +24,6 @@ import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -100,7 +94,7 @@ public class DefaultAuthenticator extends Authenticator {
     /**
      * Proxy authorization string in form of username:password.
      *
-     * @param proxyAuth
+     * @param proxyAuth Proxy authorization string
      */
     public void setProxyAuth(String proxyAuth) {
         if (proxyAuth == null) {
@@ -211,62 +205,7 @@ public class DefaultAuthenticator extends Authenticator {
     }
 
     static Authenticator getCurrentAuthenticator() {
-        try {
-            return AccessController.doPrivileged(new PrivilegedExceptionAction<Authenticator>() {
-                @Override
-                public Authenticator run() throws Exception {
-                    Method method = Authenticator.class.getMethod("getDefault");
-                    return (Authenticator) method.invoke(null);
-                }
-
-            });
-        } catch (PrivilegedActionException pae) {
-            if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.log(Level.FINE, null, pae);
-            }
-            Exception ex = pae.getException();
-            if (!(ex instanceof NoSuchMethodException)) {
-                // if Authenticator.getDefault has not been found,
-                // we likely didn't get through sec, so return null
-                // and don't care about JDK version we're on
-                return null;
-            }
-            // or we're on JDK <9, so let's continue the old way...
-        }
-
-        final Field f = getTheAuthenticator();
-        if (f == null) {
-            return null;
-        }
-
-        try {
-            AccessController.doPrivileged(new PrivilegedAction<Void>() {
-                @Override
-                public Void run() {
-                    f.setAccessible(true);
-                    return null;
-                }
-            });
-            return (Authenticator) f.get(null);
-        } catch (IllegalAccessException | IllegalArgumentException ex) {
-            return null;
-        } finally {
-            AccessController.doPrivileged(new PrivilegedAction<Void>() {
-                @Override
-                public Void run() {
-                    f.setAccessible(false);
-                    return null;
-                }
-            });
-        }
-    }
-
-    private static Field getTheAuthenticator() {
-        try {
-            return Authenticator.class.getDeclaredField("theAuthenticator");
-        } catch (NoSuchFieldException | SecurityException ex) {
-            return null;
-        }
+        return Utils.getCurrentAuthenticator();
     }
 
     public static interface Receiver {
