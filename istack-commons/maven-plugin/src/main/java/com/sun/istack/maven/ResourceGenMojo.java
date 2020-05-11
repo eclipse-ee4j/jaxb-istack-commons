@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -93,7 +93,7 @@ public class ResourceGenMojo extends AbstractMojo {
     private File license;
 
     /**
-     * Mark generated sources with {@code @javax.annotation.Generated}.
+     * Mark generated sources with {@code @jakarta.annotation.Generated}.
      * @since 3.0.5
      */
     @Parameter(property = "atGenerated", defaultValue = "false")
@@ -216,8 +216,8 @@ public class ResourceGenMojo extends AbstractMojo {
             );
 
             if (atGenerated) {
-                // no direct dependency on JSR-250 API
-                JClass annotation = cm.ref("javax.annotation.Generated");
+                // no direct dependency on Jakarta annotations API
+                JClass annotation = cm.ref("jakarta.annotation.Generated");
                 JAnnotationUse generated = clazz.annotate(annotation);
                 generated.param("value", ResourceGenMojo.class.getName());
             }
