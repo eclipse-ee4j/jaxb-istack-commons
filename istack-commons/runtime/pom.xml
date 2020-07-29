@@ -74,7 +74,6 @@
                                 <compileSourceRoot>${mrjar.sourceDirectory}/${upper.java.level}</compileSourceRoot>
                             </compileSourceRoots>
                             <outputDirectory>${project.build.outputDirectory}/META-INF/versions/${upper.java.level}</outputDirectory>
-                            <release>${upper.java.level}</release>
                         </configuration>
                     </execution>
                 </executions>
