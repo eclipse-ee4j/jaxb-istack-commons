@@ -79,7 +79,7 @@
         <activation.version>2.0.0</activation.version>
         <maven.api.version>3.6.3</maven.api.version>
         <resolver.version>1.4.2</resolver.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <ant.version>1.10.8</ant.version>
         <codemodel.version>3.0.0-M4</codemodel.version>
         <plexus-utils.version>3.3.0</plexus-utils.version>
