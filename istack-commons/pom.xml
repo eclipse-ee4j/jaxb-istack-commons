@@ -76,6 +76,7 @@
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.0.0</spotbugs.version>
 
+
         <maven.api.version>3.5.2</maven.api.version>
         <resolver.version>1.1.1</resolver.version>
         <mrjar.sourceDirectory>${project.basedir}/src/main/java-mr</mrjar.sourceDirectory>
