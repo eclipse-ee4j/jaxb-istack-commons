@@ -347,6 +347,7 @@ public class ResourceGenMojo extends AbstractMojo {
         return NameConverter.smart.toClassName(name)+"Messages";
     }
 
+
     /**
      * Writes all the source files under the specified file folder and inserts a
      * license file each java source file.
