@@ -18,8 +18,8 @@
         <version>3.0.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>istack-commons-tools</artifactId>
 
+    <artifactId>istack-commons-tools</artifactId>
     <name>istack common utility code tools</name>
 
     <dependencies>

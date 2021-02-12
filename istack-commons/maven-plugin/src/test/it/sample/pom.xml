@@ -24,7 +24,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <resgen.plugin.version>3.0.5-SNAPSHOT</resgen.plugin.version>
+        <resgen.plugin.version>3.0.12-SNAPSHOT</resgen.plugin.version>
     </properties>
 
     <dependencies>
