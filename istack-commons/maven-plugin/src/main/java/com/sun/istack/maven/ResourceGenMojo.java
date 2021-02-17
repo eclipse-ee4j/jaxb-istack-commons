@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -99,6 +99,13 @@ public class ResourceGenMojo extends AbstractMojo {
      */
     @Parameter(property = "atGenerated", defaultValue = "false")
     private boolean atGenerated;
+
+    /**
+     * Generate javadoc comments.
+     * @since 4.0.1
+     */
+    @Parameter(property = "rs.javadoc", defaultValue = "true")
+    private boolean javadoc;
 
     /**
      * File encoding for generated sources.
@@ -212,9 +219,11 @@ public class ResourceGenMojo extends AbstractMojo {
                 throw new MojoExecutionException("Name conflict "+className);
             }
 
-            clazz.javadoc().add(
-                "Defines string formatting method for each constant in the resource file"
-            );
+            if (javadoc) {
+                clazz.javadoc().add(
+                        "Defines string formatting method for each constant in the resource file"
+                );
+            }
 
             if (atGenerated) {
                 // no direct dependency on Jakarta annotations API
@@ -294,7 +303,9 @@ public class ResourceGenMojo extends AbstractMojo {
                 method.body()._return(format);
 
                 JMethod method2 = clazz.method(JMod.PUBLIC|JMod.STATIC, String.class, methodBaseName);
-                method2.javadoc().add(e.getValue());
+                if (javadoc) {
+                    method2.javadoc().add(escape(e.getValue().toString()));
+                }
 
                 JInvocation localize = JExpr.invoke(method);
                 for( int i=0; i<countArgs; i++ ) {
@@ -345,6 +356,10 @@ public class ResourceGenMojo extends AbstractMojo {
         int suffixIndex = name.lastIndexOf('.');
         name = name.substring(0,suffixIndex);
         return NameConverter.smart.toClassName(name)+"Messages";
+    }
+
+    private String escape(String s) {
+        return s.replaceAll("<", "{@code <}").replaceAll(">", "{@code >}");
     }
 
     /**
