@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,6 +16,8 @@ import org.apache.tools.ant.IntrospectionHelper;
 import org.apache.tools.ant.Task;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +83,27 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
 
             //close/cleanup all classloaders but the one which loaded this class
             while (cl != null && !ccl.equals(cl)) {
-                try {
-                    ((Closeable) cl).close();
-                } catch (IOException ex) {
-                    throw new BuildException(ex);
+                if (cl instanceof Closeable) {
+                    //JDK7+, ParallelWorldClassLoader, Ant (AntClassLoader5)
+                    try {
+                        ((Closeable) cl).close();
+                    } catch (IOException ex) {
+                        throw new BuildException(ex);
+                    }
+                } else {
+                    if (cl instanceof URLClassLoader) {
+                        //JDK6 - API jars are loaded by instance of URLClassLoader
+                        //so use proprietary API to release holded resources
+                        try {
+                            Class clUtil = ccl.loadClass("sun.misc.ClassLoaderUtil");
+                            Method release = clUtil.getDeclaredMethod("releaseLoader", URLClassLoader.class);
+                            release.invoke(null, cl);
+                        } catch (ClassNotFoundException ex) {
+                            //not Sun JDK 6, ignore
+                        } catch (ReflectiveOperationException | IllegalArgumentException | SecurityException ex) {
+                            throw new BuildException(ex);
+                        }
+                    }
                 }
                 cl = getParentClassLoader(cl);
             }
