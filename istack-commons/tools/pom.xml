@@ -15,7 +15,7 @@
     <parent>
         <groupId>com.sun.istack</groupId>
         <artifactId>istack-commons</artifactId>
-        <version>3.0.12-SNAPSHOT</version>
+        <version>3.0.13-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
