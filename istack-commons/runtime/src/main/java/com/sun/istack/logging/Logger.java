@@ -37,6 +37,8 @@ public class Logger {
 
     /**
      * Prevents creation of a new instance of this Logger unless used by a subclass.
+     * @param systemLoggerName system logger name
+     * @param componentName component name
      */
     protected Logger(final String systemLoggerName, final String componentName) {
         this.componentClassName = "[" + componentName + "] ";
@@ -325,6 +327,7 @@ public class Logger {
      * {@code exception} original cause is initialized with instance referenced
      * by {@code cause} parameter.
      *
+     * @param <T> type
      * @param exception exception whose message should be logged. Must not be
      *        {@code null}.
      * @param cause initial cause of the exception that should be logged as well
@@ -356,6 +359,7 @@ public class Logger {
      * {@link #logSevereException(Throwable, Throwable)}
      * method version but you might still want to log the original cause as well.
      *
+     * @param <T> type
      * @param exception exception whose message should be logged. Must not be
      *        {@code null}.
      * @param logCause deterimnes whether initial cause of the exception should
@@ -377,6 +381,11 @@ public class Logger {
 
     /**
      * Same as {@link #logSevereException(Throwable, boolean) logSevereException(exception, true)}.
+     * @param <T> type
+     * @param exception exception whose message should be logged. Must not be
+     *        {@code null}.
+     * @return the same exception instance that was passed in as the {@code exception}
+     *         parameter.
      */
     public <T extends Throwable> T logSevereException(final T exception) {
         if (this.logger.isLoggable(Level.SEVERE)) {
@@ -398,6 +407,7 @@ public class Logger {
      * {@code exception} original cause is initialized with instance referenced
      * by {@code cause} parameter.
      *
+     * @param <T> type
      * @param exception exception whose message should be logged. Must not be
      *        {@code null}.
      * @param cause initial cause of the exception that should be logged as well
@@ -430,6 +440,7 @@ public class Logger {
      * {@link #logException(Throwable, Throwable, Level) logException(exception, cause, level)}
      * method version but you might still want to log the original cause as well.
      *
+     * @param <T> type
      * @param exception exception whose message should be logged. Must not be
      *        {@code null}.
      * @param logCause deterimnes whether initial cause of the exception should
@@ -453,6 +464,12 @@ public class Logger {
     /**
      * Same as {@link #logException(Throwable, Throwable, Level)
      * logException(exception, true, level)}.
+     * @param <T> type
+     * @param exception exception whose message should be logged. Must not be
+     *        {@code null}.
+     * @param level loging level which should be used for logging
+     * @return the same exception instance that was passed in as the {@code exception}
+     *         parameter.
      */
     public <T extends Throwable> T logException(final T exception, final Level level) {
         if (this.logger.isLoggable(level)) {

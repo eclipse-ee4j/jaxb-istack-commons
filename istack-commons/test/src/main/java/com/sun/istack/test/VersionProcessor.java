@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -68,7 +68,7 @@ public final class VersionProcessor {
             until = null;
 
         if( excludeFromValue!=null && !excludeFromValue.trim().isEmpty()) {
-            excludeVersions = new HashSet<Object>();
+            excludeVersions = new HashSet<>();
             String v = excludeFromValue.trim();
             if(v.equals("all")) {
                 excludeVersions.add(ALL_VERSION);
@@ -92,6 +92,8 @@ public final class VersionProcessor {
     /**
      * Checks if the test is valid against the JAXB RI of
      * the specified version.
+     * @param v version to check
+     * @return true if the test is valid
      */
     public boolean isApplicable(VersionNumber v) {
         if( excludeVersions!=null ) {

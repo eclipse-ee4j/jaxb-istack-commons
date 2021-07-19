@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference;
  * such as JAXB marshallers.
  *
  * @author Kohsuke Kawaguchi
+ * @param <T> type
  */
 public interface Pool<T> {
 
@@ -26,11 +27,13 @@ public interface Pool<T> {
      *
      * <p>
      * If no object is available in the pool, this method creates a new one.
+     * @return an object from the pool
      */
     @NotNull T take();
 
     /**
      * Returns an object back to the pool.
+     * @param t object to put back to pool
      */
     void recycle(@NotNull T t);
 
@@ -41,10 +44,17 @@ public interface Pool<T> {
      * <h2>Note for Implementors</h2>
      * <p>
      * Don't rely on the fact that this class extends from {@link ConcurrentLinkedQueue}.
+     * @param <T> type
      */
     public abstract class Impl<T> implements Pool<T> {
 
         private volatile WeakReference<ConcurrentLinkedQueue<T>> queue;
+
+        /**
+         * Create new Impl
+         */
+        protected Impl() {
+        }
 
         /**
          * Gets a new object from the pool.
@@ -55,6 +65,7 @@ public interface Pool<T> {
          * @return
          *      always non-null.
          */
+        @Override
         public final @NotNull T take() {
             T t = getQueue().poll();
             if(t==null) {
@@ -65,7 +76,9 @@ public interface Pool<T> {
 
         /**
          * Returns an object back to the pool.
+         * @param t object to put back to the pool
          */
+        @Override
         public final void recycle(T t) {
             getQueue().offer(t);
         }
@@ -79,8 +92,8 @@ public interface Pool<T> {
                 }
             }
             // overwrite the queue
-            ConcurrentLinkedQueue<T> d = new ConcurrentLinkedQueue<T>();
-            queue = new WeakReference<ConcurrentLinkedQueue<T>>(d);
+            ConcurrentLinkedQueue<T> d = new ConcurrentLinkedQueue<>();
+            queue = new WeakReference<>(d);
 
             return d;
         }
@@ -95,6 +108,7 @@ public interface Pool<T> {
          * <p>
          * Also note that multiple threads may call this method
          * concurrently.
+         * @return an object from an empty pool
          */
         protected abstract @NotNull T create();
     }

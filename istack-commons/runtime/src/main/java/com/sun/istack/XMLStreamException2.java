@@ -42,6 +42,7 @@ public class XMLStreamException2 extends XMLStreamException {
     /**
      * {@link XMLStreamException} doesn't return the correct cause.
      */
+    @Override
     public Throwable getCause() {
         return getNestedException();
     }

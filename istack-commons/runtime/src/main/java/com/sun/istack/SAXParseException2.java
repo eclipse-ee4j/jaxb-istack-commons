@@ -36,6 +36,7 @@ public class SAXParseException2 extends SAXParseException {
         super(message, publicId, systemId, lineNumber, columnNumber, e);
     }
 
+    @Override
     public Throwable getCause() {
         return getException();
     }

@@ -32,10 +32,12 @@ public class FragmentContentHandler extends XMLFilterImpl {
         setContentHandler(handler);
     }
 
+    @Override
     public void startDocument() throws SAXException {
         // noop
     }
 
+    @Override
     public void endDocument() throws SAXException {
         // noop
     }

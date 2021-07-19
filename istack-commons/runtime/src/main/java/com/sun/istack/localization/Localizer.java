@@ -51,7 +51,7 @@ public class Localizer {
 
         try {
             ResourceBundle bundle =
-                (ResourceBundle) _resourceBundles.get(bundlename);
+                    _resourceBundles.get(bundlename);
 
             if (bundle == null) {
                 bundle = l.getResourceBundle(_locale);
