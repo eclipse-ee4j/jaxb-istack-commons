@@ -81,6 +81,7 @@ public class ResourceGenTask extends Task {
     }
 
     /**
+     * @param license
      * @since 2.12
      */
     public void setLicense(File license) {
@@ -92,12 +93,14 @@ public class ResourceGenTask extends Task {
     }
 
     /**
+     * @param localizationUtilitiesPkgName
      * @since 2.12
      */
     public void setLocalizationUtilitiesPkgName(String localizationUtilitiesPkgName) {
         this.localizationUtilitiesPkgName = localizationUtilitiesPkgName;
     }
 
+    @Override
     public void execute() throws BuildException {
         if(resources==null)
             throw new BuildException("No resource file is specified");
@@ -255,7 +258,7 @@ public class ResourceGenTask extends Task {
      * Counts the number of arguments.
      */
     private int countArgs(String value) {
-        List<String> x = new ArrayList<String>();
+        List<String> x = new ArrayList<>();
 
         while(true) {
             String r1 = MessageFormat.format(value, x.toArray());
@@ -293,6 +296,7 @@ public class ResourceGenTask extends Task {
          *      LicenseCodeWriter simply decorates this underlying CodeWriter by
          *      adding prolog comments.
          * @param license license File
+         * @param encoding
          */
         public LicenseCodeWriter(CodeWriter core, File license, String encoding) {
             super(core);
@@ -300,6 +304,7 @@ public class ResourceGenTask extends Task {
             this.encoding = encoding;
         }
 
+        @Override
         public Writer openSource(JPackage pkg, String fileName) throws IOException {
             Writer w = super.openSource(pkg,fileName);
 

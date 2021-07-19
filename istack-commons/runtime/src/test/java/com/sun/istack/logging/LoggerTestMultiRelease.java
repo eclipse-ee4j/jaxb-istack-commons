@@ -30,6 +30,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class LoggerTestMultiRelease {
 
+    public LoggerTestMultiRelease() {
+    }
+
     /**
      * Test source method name resolution
      */

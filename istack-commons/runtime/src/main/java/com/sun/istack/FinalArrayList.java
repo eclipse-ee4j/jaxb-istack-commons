@@ -20,6 +20,7 @@ import java.util.Collection;
  * This gives HotSpot a better hint that all methods can be inlined.
  *
  * @author Kohsuke Kawaguchi
+ * @param <T> element type
  */
 public final class FinalArrayList<T> extends ArrayList<T> {
     public FinalArrayList(int initialCapacity) {

@@ -31,6 +31,7 @@ public class SAXException2 extends SAXException {
         super(message, e);
     }
 
+    @Override
     public Throwable getCause() {
         return getException();
     }

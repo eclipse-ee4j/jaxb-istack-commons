@@ -51,6 +51,12 @@ public class XMLStreamReaderToContentHandler {
     private final String[] inscopeNamespaces;
 
     /**
+     * @param staxCore
+     *                StAX event source
+     * @param saxCore
+     *                SAXevent sink
+     * @param eagerQuit
+     * @param fragment
      * @see #XMLStreamReaderToContentHandler(XMLStreamReader, ContentHandler, boolean, boolean, String[])
      */
     public XMLStreamReaderToContentHandler(XMLStreamReader staxCore, ContentHandler saxCore, boolean eagerQuit, boolean fragment) {
@@ -186,15 +192,19 @@ public class XMLStreamReaderToContentHandler {
             return;
 
         saxHandler.setDocumentLocator(new Locator() {
+            @Override
             public int getColumnNumber() {
                 return staxStreamReader.getLocation().getColumnNumber();
             }
+            @Override
             public int getLineNumber() {
                 return staxStreamReader.getLocation().getLineNumber();
             }
+            @Override
             public String getPublicId() {
                 return staxStreamReader.getLocation().getPublicId();
             }
+            @Override
             public String getSystemId() {
                 return staxStreamReader.getLocation().getSystemId();
             }

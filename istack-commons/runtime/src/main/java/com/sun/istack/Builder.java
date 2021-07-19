@@ -13,6 +13,7 @@ package com.sun.istack;
 /**
  *
  * @author Martin Grebac
+ * @param <T> type of the Builder
  */
 public interface Builder<T> {
     T build();
