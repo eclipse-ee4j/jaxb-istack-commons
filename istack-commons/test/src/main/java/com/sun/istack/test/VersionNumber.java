@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -46,6 +46,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
     /**
      * Parses a string like "1.0.2" into the version number.
      *
+     * @param num string to parse
      * @throws IllegalArgumentException
      *      if the parsing fails.
      */
@@ -72,6 +73,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
         }
     }
 
+    @Override
     public String toString() {
         StringBuffer buf = new StringBuffer();
         for( int i=0; i<digits.length; i++ ) {
@@ -90,6 +92,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
     }
 
 
+    @Override
     public boolean equals( Object o ) {
         if (o instanceof VersionNumber) {
             return compareTo((VersionNumber)o)==0;
@@ -97,6 +100,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
         return false;
     }
 
+    @Override
     public int hashCode() {
         int x=0;
         for (int i : digits)
@@ -104,6 +108,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
         return x;
     }
 
+    @Override
     public int compareTo(VersionNumber rhs) {
         for( int i=0; ; i++ ) {
             if( i==this.digits.length && i==rhs.digits.length )

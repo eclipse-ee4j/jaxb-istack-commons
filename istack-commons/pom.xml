@@ -74,17 +74,17 @@
         <spotbugs.exclude>exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.2.0</spotbugs.version>
+        <spotbugs.version>4.3.0</spotbugs.version>
 
         <activation.version>1.2.2</activation.version>
-        <maven.api.version>3.6.3</maven.api.version>
-        <maven.resolver.version>1.4.2</maven.resolver.version>
-        <junit.version>4.13.1</junit.version>
-        <ant.version>1.10.9</ant.version>
-        <codemodel.version>2.3.3</codemodel.version>
+        <maven.api.version>3.8.1</maven.api.version>
+        <maven.resolver.version>1.7.1</maven.resolver.version>
+        <junit.version>4.13.2</junit.version>
+        <ant.version>1.10.11</ant.version>
+        <codemodel.version>2.3.4</codemodel.version>
         <plexus-utils.version>3.3.0</plexus-utils.version>
-        <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
-        <testng.version>6.14.2</testng.version>
+        <maven-plugin-annotations.version>3.6.1</maven-plugin-annotations.version>
+        <testng.version>7.4.0</testng.version>
         <args4j.version>2.33</args4j.version>
 
         <mrjar.sourceDirectory>${project.basedir}/src/main/java-mr</mrjar.sourceDirectory>
@@ -296,7 +296,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -328,7 +328,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-invoker-plugin</artifactId>
-                    <version>3.2.1</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -338,7 +338,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -439,6 +439,8 @@
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
                 </configuration>
                 <executions>
                     <execution>
@@ -536,7 +538,7 @@
                         <plugin>
                             <groupId>org.jacoco</groupId>
                             <artifactId>jacoco-maven-plugin</artifactId>
-                            <version>0.8.6</version>
+                            <version>0.8.7</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>

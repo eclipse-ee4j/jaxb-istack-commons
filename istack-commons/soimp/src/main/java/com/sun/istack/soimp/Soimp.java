@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -107,6 +107,8 @@ public class Soimp extends Task {
      *
      * @return
      *      0 if success. Non-zero if failed.
+     * @throws IOException for errors
+     * @throws ProcessingException for errors
      */
     public int runCLI(String[] args) throws IOException, ProcessingException {
         CmdLineParser p = new CmdLineParser(this);
@@ -151,6 +153,7 @@ public class Soimp extends Task {
             svn = svnExe;
 
         listener = new Listener() {
+            @Override
             public void info(String line) {
                 log(line,Project.MSG_INFO);
             }
@@ -165,9 +168,7 @@ public class Soimp extends Task {
                 svnUpdate(wsDir);
             else
                 svnImport(wsDir,remoteURL);
-        } catch (ProcessingException e) {
-            throw new BuildException(e);
-        } catch (IOException e) {
+        } catch (ProcessingException | IOException e) {
             throw new BuildException(e);
         }
     }
@@ -252,8 +253,8 @@ public class Soimp extends Task {
 
         String log = exec(buildSvnWithUsername("status"), ws, "Failed to stat the workspace");
 
-        List<String> newFiles = new ArrayList<String>();
-        List<String> deletedFiles = new ArrayList<String>();
+        List<String> newFiles = new ArrayList<>();
+        List<String> deletedFiles = new ArrayList<>();
         // % svn status
         // ?      xyz
         // M      abc

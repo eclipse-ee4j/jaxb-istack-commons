@@ -28,7 +28,7 @@ public final class ByteArrayDataSource implements DataSource {
 
     /**
      * @param buf input buffer - the byte array isn't being copied; used directly
-     * @param contentType
+     * @param contentType content type
      */
     public ByteArrayDataSource(byte[] buf, String contentType) {
         this(buf,buf.length,contentType);
@@ -36,8 +36,8 @@ public final class ByteArrayDataSource implements DataSource {
 
     /**
      * @param buf input buffer - the byte array isn't being copied; used directly
-     * @param length
-     * @param contentType
+     * @param length length
+     * @param contentType content type
      */
     public ByteArrayDataSource(byte[] buf, int length, String contentType) {
         this.buf = buf;
@@ -45,20 +45,24 @@ public final class ByteArrayDataSource implements DataSource {
         this.contentType = contentType;
     }
 
+    @Override
     public String getContentType() {
         if(contentType==null)
             return "application/octet-stream";
         return contentType;
     }
 
+    @Override
     public InputStream getInputStream() {
         return new ByteArrayInputStream(buf,0,len);
     }
 
+    @Override
     public String getName() {
         return null;
     }
 
+    @Override
     public OutputStream getOutputStream() {
         throw new UnsupportedOperationException();
     }
