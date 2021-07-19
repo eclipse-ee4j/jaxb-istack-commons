@@ -36,6 +36,10 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
 
     private final AntElement root = new AntElement("root");
 
+    public ProtectedTask() {
+        super();
+    }
+
     @Override
     public void setDynamicAttribute(String name, String value) throws BuildException {
         root.setDynamicAttribute(name, value);

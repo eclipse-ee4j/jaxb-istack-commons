@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -62,6 +62,7 @@ public class AntXmlFormatter implements TestListener,Closeable {
         System.setErr(new PrintStream(new ForkOutputStream(errBuf,err)));
     }
 
+    @Override
     public void close() {
         // restore
         System.setOut(out);
@@ -81,11 +82,11 @@ public class AntXmlFormatter implements TestListener,Closeable {
     public void startTest(Test test) {
         assert antf==null;
         try {
-            antf = formatter.newInstance();
-        } catch (InstantiationException e) {
-            throw new InstantiationError(e.getMessage());
+            antf = formatter.getConstructor().newInstance();
         } catch (IllegalAccessException e) {
             throw new IllegalAccessError(e.getMessage());
+        } catch (ReflectiveOperationException e) {
+            throw new InstantiationError(e.getMessage());
         }
 
         String testName = getTestName(test);

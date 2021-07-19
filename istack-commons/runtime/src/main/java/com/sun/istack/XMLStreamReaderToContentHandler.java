@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -51,6 +51,12 @@ public class XMLStreamReaderToContentHandler {
     private final String[] inscopeNamespaces;
 
     /**
+     * @param staxCore
+     *                StAX event source
+     * @param saxCore
+     *                SAXevent sink
+     * @param eagerQuit
+     * @param fragment
      * @see #XMLStreamReaderToContentHandler(XMLStreamReader, ContentHandler, boolean, boolean, String[])
      */
     public XMLStreamReaderToContentHandler(XMLStreamReader staxCore, ContentHandler saxCore, boolean eagerQuit, boolean fragment) {
@@ -186,15 +192,19 @@ public class XMLStreamReaderToContentHandler {
             return;
 
         saxHandler.setDocumentLocator(new Locator() {
+            @Override
             public int getColumnNumber() {
                 return staxStreamReader.getLocation().getColumnNumber();
             }
+            @Override
             public int getLineNumber() {
                 return staxStreamReader.getLocation().getLineNumber();
             }
+            @Override
             public String getPublicId() {
                 return staxStreamReader.getLocation().getPublicId();
             }
+            @Override
             public String getSystemId() {
                 return staxStreamReader.getLocation().getSystemId();
             }

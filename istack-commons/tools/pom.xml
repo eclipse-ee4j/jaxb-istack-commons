@@ -98,8 +98,6 @@
                         <configuration>
                             <compilerArgs>
                                 <arg>--add-reads</arg>
-                                <arg>com.sun.istack.tools=org.testng</arg>
-                                <arg>--add-reads</arg>
                                 <arg>com.sun.istack.tools=ALL-UNNAMED</arg>
                             </compilerArgs>
                         </configuration>
@@ -135,6 +133,24 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
+                </configuration>
+            </plugin>
+            <!-- Run tests on multi-release jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/DefaultAuthenticatorTest.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>

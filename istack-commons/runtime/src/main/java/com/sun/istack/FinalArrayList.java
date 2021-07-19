@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -20,6 +20,7 @@ import java.util.Collection;
  * This gives HotSpot a better hint that all methods can be inlined.
  *
  * @author Kohsuke Kawaguchi
+ * @param <T> element type
  */
 public final class FinalArrayList<T> extends ArrayList<T> {
     public FinalArrayList(int initialCapacity) {
