@@ -76,7 +76,7 @@
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.3.0</spotbugs.version>
 
-        <activation.version>2.0.1</activation.version>
+        <activation.version>2.0.2-SNAPSHOT</activation.version>
         <maven.api.version>3.8.1</maven.api.version>
         <maven.resolver.version>1.7.1</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
