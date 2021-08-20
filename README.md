@@ -8,19 +8,19 @@
 
 # iStack Common Utility Code
 
-This project is part of [Eclipse Implementation of JAXB](https://projects.eclipse.org/projects/ee4j.jaxb-impl).
+[![Build Status](https://github.com/eclipse-ee4j/jaxb-istack-commons/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/eclipse-ee4j/jaxb-istack-commons/actions/workflows/maven.yml?branch=master)
+[![Jakarta Staging (Snapshots)](https://img.shields.io/nexus/s/https/jakarta.oss.sonatype.org/com.sun.istack/istack-commons.svg)](https://jakarta.oss.sonatype.org/content/repositories/staging/com/sun/istack/istack-commons/)
 
+This project is part of [Eclipse Implementation of JAXB](https://projects.eclipse.org/projects/ee4j.jaxb-impl).
 
 ## License
 
 iStack Common Utility Code is licensed under a license - [EDL 1.0](LICENSE.md).
 
-
 ## Contributing
 
 We use [contribution policy](CONTRIBUTING.md), which means we can only accept contributions under
 the terms of [Eclipse Contributor Agreement](http://www.eclipse.org/legal/ECA.php).
-
 
 ## Links
 
