@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -63,7 +63,7 @@ public class ParallelWorldClassLoaderTest {
 //        Class c3 = pwcl.findClass("javax.xml.ws.Service");
 //        Assert.assertEquals(c3.getDeclaredMethods().length, 1);
 
-        Class c1,c2;
+        Class<?> c1,c2;
         try {
             c1 = Class.forName("javax.xml.ws.Service", false, pwcl);
             // jacoco adds method '$jacocoInit' so there can be at most two
@@ -101,7 +101,7 @@ public class ParallelWorldClassLoaderTest {
         if (isJDK9()) return;
         Enumeration<URL> foundURLs = pwcl.getResources("javax/xml/ws/Service.class");
         // TODO - this depends on jdk, maven cp, e.g.
-        ArrayList al = Collections.list(foundURLs);
+        ArrayList<URL> al = Collections.list(foundURLs);
         int found = al.size();
         if (!((found == 3) || (found == 4))) {
             Assert.fail("Expected 3/4 elements. Verify the urls: \n" + al);
@@ -115,10 +115,6 @@ public class ParallelWorldClassLoaderTest {
     }
 
     private static boolean isJDK9() {
-        String ver = System.getProperty("java.version");
-        int idx = ver.indexOf('-');
-        int idx2 = ver.indexOf('.', 1);
-        float v = Float.parseFloat(idx > 0 ? ver.substring(0, idx) : idx2 > 0 ? ver.substring(0, idx2) : ver);
-        return v > 8;
+        return true;
     }
 }

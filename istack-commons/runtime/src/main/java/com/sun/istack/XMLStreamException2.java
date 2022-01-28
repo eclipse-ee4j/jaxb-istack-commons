@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -19,6 +19,9 @@ import javax.xml.stream.Location;
  * @author Kohsuke Kawaguchi
  */
 public class XMLStreamException2 extends XMLStreamException {
+
+    private static final long serialVersionUID = 1409033131880742500L;
+
     public XMLStreamException2(String msg) {
         super(msg);
     }
