@@ -39,4 +39,4 @@ jobs:
     - name: Verify
       run: |
         cd istack-commons
-        mvn -B -V -U -C -Pstaging,oss-release clean install org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
+        mvn -B -V -U -C -Pstaging,oss-release clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
