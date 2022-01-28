@@ -74,7 +74,7 @@
         <copyright.ignoreyear>false</copyright.ignoreyear>
         <copyright.scmonly>true</copyright.scmonly>
         <copyright.update>false</copyright.update>
-        <spotbugs.exclude>${config.dir}/exclude.xml</spotbugs.exclude>
+        <spotbugs.exclude>${config.dir}/spotbugs-exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.5.3.0</spotbugs.version>
