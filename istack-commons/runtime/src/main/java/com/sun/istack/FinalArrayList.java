@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -23,6 +23,9 @@ import java.util.Collection;
  * @param <T> element type
  */
 public final class FinalArrayList<T> extends ArrayList<T> {
+
+    private static final long serialVersionUID = -540534530037816397L;
+
     public FinalArrayList(int initialCapacity) {
         super(initialCapacity);
     }

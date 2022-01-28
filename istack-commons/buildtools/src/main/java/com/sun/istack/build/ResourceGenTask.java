@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -81,7 +81,6 @@ public class ResourceGenTask extends Task {
     }
 
     /**
-     * @param license
      * @since 2.12
      */
     public void setLicense(File license) {
@@ -93,7 +92,6 @@ public class ResourceGenTask extends Task {
     }
 
     /**
-     * @param localizationUtilitiesPkgName
      * @since 2.12
      */
     public void setLocalizationUtilitiesPkgName(String localizationUtilitiesPkgName) {
@@ -296,7 +294,6 @@ public class ResourceGenTask extends Task {
          *      LicenseCodeWriter simply decorates this underlying CodeWriter by
          *      adding prolog comments.
          * @param license license File
-         * @param encoding
          */
         public LicenseCodeWriter(CodeWriter core, File license, String encoding) {
             super(core);

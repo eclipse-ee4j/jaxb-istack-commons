@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -20,7 +20,7 @@ import java.net.URL;
  */
 public class Which {
 
-    public static String which( Class clazz ) {
+    public static String which( Class<?> clazz ) {
         return which( clazz.getName(), SecureLoader.getClassClassLoader(clazz));
     }
 

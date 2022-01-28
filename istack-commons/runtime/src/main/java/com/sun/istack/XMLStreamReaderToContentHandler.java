@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -55,8 +55,6 @@ public class XMLStreamReaderToContentHandler {
      *                StAX event source
      * @param saxCore
      *                SAXevent sink
-     * @param eagerQuit
-     * @param fragment
      * @see #XMLStreamReaderToContentHandler(XMLStreamReader, ContentHandler, boolean, boolean, String[])
      */
     public XMLStreamReaderToContentHandler(XMLStreamReader staxCore, ContentHandler saxCore, boolean eagerQuit, boolean fragment) {
@@ -71,8 +69,6 @@ public class XMLStreamReaderToContentHandler {
      *                StAX event source
      * @param saxCore
      *                SAXevent sink
-     * @param eagerQuit
-     * @param fragment
      * @param inscopeNamespaces
      *                array of the even length of the form { prefix0, uri0, prefix1, uri1, ... }
      */

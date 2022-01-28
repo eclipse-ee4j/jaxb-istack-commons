@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,42 +10,63 @@
 
 package com.sun.istack.logging;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.StreamHandler;
 
 /**
  *
- * @author Marek Potociar <marek.potociar at sun.com>
+ * @author Marek Potociar
  */
-public class LoggerTest extends TestCase {
-    
-    public LoggerTest(String testName) {
-        super(testName);
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+public class LoggerTest {
 
     /**
      * Test of getLogger method, of class Logger.
      */
+    @Test
     public void testGetLogger() {
         Logger result = Logger.getLogger(LoggerTest.class);
-        assertNotNull(result);
+        Assert.assertNotNull(result);
     }
 
     /**
      * Test of getSystemLoggerName method, of class Logger.
      */
+    @Test
     public void testGetSubsystemName() {
         String result = Logger.getSystemLoggerName(LoggerTest.class);
-        assertEquals("com.sun.istack.logging", result);
+        Assert.assertEquals("com.sun.istack.logging", result);
+    }
+
+    /**
+     * Test source method name resolution
+     */
+    @Test
+    public void testGetCallerMethodName() throws UnsupportedEncodingException {
+        Logger istackLogger = Logger.getLogger(LoggerTest.class);
+        java.util.logging.Logger utilLogger =
+                java.util.logging.Logger.getLogger(Logger.getSystemLoggerName(LoggerTest.class));
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        StreamHandler streamHandler = new StreamHandler(outputStream, new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                return record.getSourceMethodName();
+            }
+        });
+        utilLogger.addHandler(streamHandler);
+
+        istackLogger.logException(new Exception("This LOG entry is part of the test"), Level.INFO);
+
+        streamHandler.flush();
+
+        String logText = outputStream.toString("UTF-8");
+        Assert.assertEquals("testGetCallerMethodName", logText);
     }
 
 }

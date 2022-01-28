@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -42,27 +42,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>add-mr-resource</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${mrjar.sourceDirectory}</directory>
-                                    <targetPath>META-INF/versions</targetPath>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <executions>
@@ -76,18 +55,6 @@
                                 <arg>--add-reads</arg>
                                 <arg>com.sun.istack.tools=ALL-UNNAMED</arg>
                             </compilerArgs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-compile-mr</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <compileSourceRoots>
-                                <compileSourceRoot>${mrjar.sourceDirectory}/${upper.java.level}</compileSourceRoot>
-                            </compileSourceRoots>
-                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/${upper.java.level}</outputDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -105,19 +72,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Export-Package>
-                            !META-INF.*,
-                            *
-                        </Export-Package>
-                        <Multi-Release>true</Multi-Release>
-                    </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -133,24 +87,6 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
-                </configuration>
-            </plugin>
-            <!-- Run tests on multi-release jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>**/DefaultAuthenticatorTest.java</include>
-                    </includes>
                 </configuration>
             </plugin>
             <plugin>
