@@ -84,13 +84,14 @@
         <maven.resolver.version>1.7.3</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
         <ant.version>1.10.12</ant.version>
-        <codemodel.version>4.0.0-M2</codemodel.version>
+        <codemodel.version>4.0.0-M4</codemodel.version>
         <plexus-utils.version>3.3.0</plexus-utils.version>
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
         <testng.version>7.4.0</testng.version>
         <args4j.version>2.33</args4j.version>
 
         <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.testRelease>11</maven.compiler.testRelease>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
 
