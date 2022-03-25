@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -279,6 +279,10 @@ public class ResourceGenMojo extends AbstractMojo {
                 lmf_class, "MESSAGE_FACTORY", JExpr._new(lmf_class).arg($bundle).arg(JExpr._new(supplier)));
             JFieldVar $localizer = clazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL,
                 l_class, "LOCALIZER", JExpr._new(l_class));
+
+            // [RESULT]
+            // private CLASS() {}
+            clazz.constructor(JMod.PRIVATE);
 
             for (Map.Entry<Object,Object> e : props.entrySet()) {
                 // [RESULT]
