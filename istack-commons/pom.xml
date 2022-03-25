@@ -77,21 +77,21 @@
         <spotbugs.exclude>${config.dir}/spotbugs-exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.5.3.0</spotbugs.version>
+        <spotbugs.version>4.6.0.0</spotbugs.version>
 
         <activation.version>2.1.0</activation.version>
-        <maven.api.version>3.8.4</maven.api.version>
+        <maven.api.version>3.8.5</maven.api.version>
         <maven.resolver.version>1.7.3</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
         <ant.version>1.10.12</ant.version>
         <codemodel.version>4.0.0-M4</codemodel.version>
-        <plexus-utils.version>3.3.0</plexus-utils.version>
+        <plexus-utils.version>3.4.1</plexus-utils.version>
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
-        <testng.version>7.4.0</testng.version>
+        <testng.version>7.5</testng.version>
         <args4j.version>2.33</args4j.version>
 
         <maven.compiler.release>11</maven.compiler.release>
-        <maven.compiler.testRelease>11</maven.compiler.testRelease>
+        <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
 
@@ -256,7 +256,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.9.0</version>
+                    <version>3.10.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -295,7 +295,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.3.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -310,7 +310,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.gmaven</groupId>
@@ -318,14 +318,14 @@
                     <version>1.5</version>
                     <dependencies>
                         <dependency>
-                            <groupId>org.codehaus.groovy</groupId>
+                            <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy</artifactId>
-                            <version>3.0.8</version>
+                            <version>4.0.1</version>
                         </dependency>
                         <dependency>
-                            <groupId>org.codehaus.groovy</groupId>
+                            <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>3.0.8</version>
+                            <version>4.0.1</version>
                         </dependency>
                     </dependencies>
                 </plugin>

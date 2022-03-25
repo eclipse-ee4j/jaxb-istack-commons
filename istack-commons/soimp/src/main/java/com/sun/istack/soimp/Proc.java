@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -20,7 +20,7 @@ public final class Proc {
     private final Thread t1,t2;
 
     public Proc(String cmd,String[] env,OutputStream out, File workDir) throws IOException {
-        this( Runtime.getRuntime().exec(cmd,env,workDir), null, out );
+        this( Runtime.getRuntime().exec(new String [] {cmd},env,workDir), null, out );
     }
 
     public Proc(String[] cmd,String[] env,OutputStream out, File workDir) throws IOException {
