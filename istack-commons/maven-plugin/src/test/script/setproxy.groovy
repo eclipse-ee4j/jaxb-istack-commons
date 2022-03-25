@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,9 +16,14 @@ if (settings?.proxies) {
     settings?.proxies?.each { proxy ->
         if (proxy.active) {
             if ("http".equals(proxy.protocol)) {
-                itproxy =  "-Dhttp.proxyHost=" + proxy.host
+                itproxy +=  " -Dhttp.proxyHost=" + proxy.host
                 if (proxy.port) {
                     itproxy += " -Dhttp.proxyPort=" + proxy.port
+                }
+            } else if ("https".equals(proxy.protocol)) {
+                itproxy +=  " -Dhttps.proxyHost=" + proxy.host
+                if (proxy.port) {
+                    itproxy += " -Dhttps.proxyPort=" + proxy.port
                 }
             }
             def p = new Node(proxies, "proxy")
@@ -35,14 +40,14 @@ if (settings?.proxies) {
 }
 
 if (itproxy.trim().length() > 0) {
-    log.info("Setting: " + itproxy)
+    log.info("Setting: " + itproxy.trim())
 } else {
     log.info("No proxy found")
 }
 
 def writer = new FileWriter(new File(project.build.directory, "it-settings.xml"))
-XmlNodePrinter printer = new XmlNodePrinter(new PrintWriter(writer))
+groovy.xml.XmlNodePrinter printer = new groovy.xml.XmlNodePrinter(new PrintWriter(writer))
 printer.setPreserveWhitespace(true);
 printer.print(itsettings)
 
-project.getModel().addProperty("ittest-proxy", itproxy)
+project.getModel().addProperty("ittest-proxy", itproxy.trim())
