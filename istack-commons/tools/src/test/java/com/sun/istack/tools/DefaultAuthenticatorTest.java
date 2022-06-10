@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -126,6 +126,34 @@ public class DefaultAuthenticatorTest {
             pa = da.getPasswordAuthentication();
             assertEquals("user2", pa.getUserName());
             assertEquals(")/_@B8M)gDw", new String(pa.getPassword()));
+        } finally {
+            DefaultAuthenticator.reset();
+            assertEquals(0, getCounter());
+        }
+    }
+
+    // Test auth file with passwords containing '#'
+    @Test
+    public void testPasswordWithHash() throws Exception {
+        URL url = getResourceAsUrl("com/sun/istack/tools/auth_hash_test.resource");
+        MyAuthenticator ma = createTestAuthenticator();
+        try {
+            DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
+            assertEquals(1, getCounter());
+            assertEquals(ma, da);
+            da.setAuth(new File(url.toURI()), null);
+
+            // Plain text password shall not start with '#", but it's accepted from 2nd character
+            ma.setRequestingURL("http://server1.myserver.com/plain/hash/Service.svc");
+            PasswordAuthentication pa1 = da.getPasswordAuthentication();
+            assertEquals(pa1.getUserName(), "user3");
+            assertEquals(new String(pa1.getPassword()), "P4sw0rd#InIt#");
+
+            // Encoded password can contain '#' sequence anywhere
+            ma.setRequestingURL("http://server1.myserver.com/encoded/hash/Service.svc");
+            PasswordAuthentication pa2 = da.getPasswordAuthentication();
+            assertEquals(pa2.getUserName(), "user3");
+            assertEquals(new String(pa2.getPassword()), "#P4sw0rd#InIt#");
         } finally {
             DefaultAuthenticator.reset();
             assertEquals(0, getCounter());
