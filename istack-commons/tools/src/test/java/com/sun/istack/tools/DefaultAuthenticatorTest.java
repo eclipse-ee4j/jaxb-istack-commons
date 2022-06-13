@@ -160,6 +160,28 @@ public class DefaultAuthenticatorTest {
         }
     }
 
+    // Test auth file with user containing '@'
+    @Test
+    public void testUserWithAt() throws Exception {
+        URL url = getResourceAsUrl("com/sun/istack/tools/auth_at_test.resource");
+        MyAuthenticator ma = createTestAuthenticator();
+        try {
+            DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
+            assertEquals(1, getCounter());
+            assertEquals(ma, da);
+            da.setAuth(new File(url.toURI()), null);
+
+            // User and password with '@' character encoded as "%40"
+            ma.setRequestingURL("http://server1.myserver.com/plain/hash/Service.svc");
+            PasswordAuthentication pa1 = da.getPasswordAuthentication();
+            assertEquals(pa1.getUserName(), "user@example.org");
+            assertEquals(new String(pa1.getPassword()), "p@ssword");
+        } finally {
+            DefaultAuthenticator.reset();
+            assertEquals(0, getCounter());
+        }
+    }
+
     private static URL getResourceAsUrl(String resourceName) throws RuntimeException {
         URL input = Thread.currentThread().getContextClassLoader().getResource(resourceName);
         if (input == null) {

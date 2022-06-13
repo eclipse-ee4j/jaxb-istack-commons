@@ -198,7 +198,7 @@ public class DefaultAuthenticator extends Authenticator {
                 String password = authinfo.substring(i + 1);
                 return new AuthInfo(
                         new URL(url.getProtocol(), url.getHost(), url.getPort(), url.getFile()),
-                        user, URLDecoder.decode(password, "UTF-8"));
+                        URLDecoder.decode(user, "UTF-8"), URLDecoder.decode(password, "UTF-8"));
             }
         }
         throw new Exception();
