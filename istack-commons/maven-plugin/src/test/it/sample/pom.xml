@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -34,6 +34,11 @@
             <version>${resgen.plugin.version}</version>
         </dependency>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
@@ -48,6 +53,7 @@
                 <version>${resgen.plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>resource-gen</id>
                         <goals>
                             <goal>rs-gen</goal>
                         </goals>
@@ -55,6 +61,30 @@
                             <resources>
                                 <directory>${project.basedir}/src/main/resources</directory>
                             </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>quick-gen</id>
+                        <goals>
+                            <goal>quick-gen</goal>
+                        </goals>
+                        <configuration>
+                            <packageName>org.app.annotation</packageName>
+                            <classes>
+                                <class>jakarta.xml.bind.annotation.XmlAttribute</class>
+                                <class>jakarta.xml.bind.annotation.XmlElement</class>
+                                <class>jakarta.xml.bind.annotation.XmlElementDecl</class>
+                                <class>jakarta.xml.bind.annotation.XmlElementRef</class>
+                                <class>jakarta.xml.bind.annotation.XmlElementRefs</class>
+                                <class>jakarta.xml.bind.annotation.XmlEnum</class>
+                                <class>jakarta.xml.bind.annotation.XmlRootElement</class>
+                                <class>jakarta.xml.bind.annotation.XmlSchema</class>
+                                <class>jakarta.xml.bind.annotation.XmlSchemaType</class>
+                                <class>jakarta.xml.bind.annotation.XmlTransient</class>
+                                <class>jakarta.xml.bind.annotation.XmlType</class>
+                                <class>jakarta.xml.bind.annotation.XmlValue</class>
+                            </classes>
+                            <attach>false</attach>
                         </configuration>
                     </execution>
                 </executions>
