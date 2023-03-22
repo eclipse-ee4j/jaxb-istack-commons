@@ -24,7 +24,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JVar;
 import com.sun.codemodel.writer.FileCodeWriter;
-import com.sun.codemodel.writer.FilterCodeWriter;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -35,8 +34,6 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -366,51 +363,4 @@ public class ResourceGenMojo extends AbstractMojo {
         return s.replaceAll("<", "{@code <}").replaceAll(">", "{@code >}");
     }
 
-    /**
-     * Writes all the source files under the specified file folder and inserts a
-     * license file each java source file.
-     *
-     * @author Jitendra Kotamraju
-     *
-     */
-    public static class LicenseCodeWriter extends FilterCodeWriter {
-
-        private final File license;
-
-        /**
-         * @param core This CodeWriter will be used to actually create a storage
-         * for files. LicenseCodeWriter simply decorates this underlying
-         * CodeWriter by adding prolog comments.
-         * @param license license File
-         * @param encoding encoding
-         */
-        public LicenseCodeWriter(CodeWriter core, File license, String encoding) {
-            super(core);
-            this.license = license;
-            this.encoding = encoding;
-        }
-
-        @Override
-        public Writer openSource(JPackage pkg, String fileName) throws IOException {
-            Writer w = super.openSource(pkg, fileName);
-
-            PrintWriter out = new PrintWriter(w);
-            FileInputStream fin = null;
-            try {
-                fin = new FileInputStream(license);
-                byte[] buf = new byte[8192];
-                int len;
-                while ((len = fin.read(buf)) != -1) {
-                    out.write(new String(buf, 0, len));
-                }
-            } finally {
-                if (fin != null) {
-                    fin.close();
-                }
-            }
-            out.flush();    // we can't close the stream for that would close the undelying stream.
-
-            return w;
-        }
-    }
 }
