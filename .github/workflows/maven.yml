@@ -15,6 +15,12 @@ name: Jakarta IStack Commons
 on:
   pull_request:
   push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -23,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        java_version: [ 11, 17 ]
+        java_version: [ 11, 17 , 21-ea]
 
     steps:
     - name: Checkout for build
@@ -39,4 +45,9 @@ jobs:
     - name: Verify
       run: |
         cd istack-commons
-        mvn -B -V -U -C -Pstaging,oss-release clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
+        mvn -B -V -U -C -Pstaging,oss-release,license-check clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
+    - name: Upload license-check info
+      uses: actions/upload-artifact@v3
+      with:
+        name: license-summary.txt
+        path: istack-commons/target/dash/summary
