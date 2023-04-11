@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -49,7 +49,7 @@ public class ParallelWorldClassLoaderTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDownMethod() throws Exception {
+    public void tearDownMethod() {
         Thread.currentThread().setContextClassLoader(orig);
     }
 
@@ -57,7 +57,7 @@ public class ParallelWorldClassLoaderTest {
      * Test of findClass method, of class ParallelWorldClassLoader.
      */
     @Test
-    public void testFindClass() throws Exception {
+    public void testFindClass() {
         System.out.println("findClass");
         //XXX: why this fails ?
 //        Class c3 = pwcl.findClass("javax.xml.ws.Service");
@@ -109,7 +109,7 @@ public class ParallelWorldClassLoaderTest {
     }
 
     @Test
-    public void testJaxp() throws Exception {
+    public void testJaxp() {
         XMLInputFactory inFactory = XMLInputFactory.newInstance();
         Assert.assertEquals(inFactory.getClass().getClassLoader(), ucl);
     }

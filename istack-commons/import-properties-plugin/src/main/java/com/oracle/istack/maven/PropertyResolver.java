@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -74,8 +74,6 @@ public class PropertyResolver {
         try {
             reader = new FileReader(project.getFile());
             model = mavenreader.read(reader);
-        } catch (FileNotFoundException ex) {
-             Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +107,7 @@ public class PropertyResolver {
                     MavenProject p = new MavenProject(m);
                     p.setFile(a.getFile());
                     for (Map.Entry<Object,Object> e : p.getProperties().entrySet()) {
-                        logger.info("Setting property: " + (String)e.getKey() + ":" + (String)e.getValue());
+                        logger.info("Setting property: " + e.getKey() + ":" + e.getValue());
                         properties.setProperty((String)e.getKey(), (String)e.getValue());
                     }
 

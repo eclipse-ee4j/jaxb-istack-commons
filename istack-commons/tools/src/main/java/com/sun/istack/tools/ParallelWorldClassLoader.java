@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -90,7 +90,7 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
 
-        StringBuffer sb = new StringBuffer(name.length()+prefix.length()+6);
+        StringBuilder sb = new StringBuilder(name.length()+prefix.length()+6);
         sb.append(prefix).append(name.replace('.','/')).append(".class");
 
         URL u  = getParent().getResource(sb.toString());
@@ -139,12 +139,10 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
             } catch (IOException ioe) {
                 //ignore
             }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ioe) {
-                    //ignore
-                }
+            try {
+                is.close();
+            } catch (IOException ioe) {
+                //ignore
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -88,12 +88,12 @@ public interface NameConverter
      *
      * This is the standard name conversion for JAXB.
      */
-    public static final NameConverter standard = new Standard();
+    NameConverter standard = new Standard();
 
     /**
      * Default implementation of {@link NameConverter}.
      */
-    static class Standard extends NameUtil implements NameConverter {
+    class Standard extends NameUtil implements NameConverter {
         @Override
         public String toClassName(String s) {
             return toMixedCaseName(toWordList(s), true);
@@ -249,7 +249,7 @@ public interface NameConverter
      * The only difference is that we treat '_' as a valid character
      * and not as a word separator.
      */
-    public static final NameConverter jaxrpcCompatible = new Standard() {
+    NameConverter jaxrpcCompatible = new Standard() {
         @Override
         protected boolean isPunct(char c) {
             return (c == '.' || c == '-' || c == ';' /*|| c == '_'*/ || c == '\u00b7'
@@ -270,7 +270,7 @@ public interface NameConverter
     /**
      * Smarter converter used for RELAX NG support.
      */
-    public static final NameConverter smart = new Standard() {
+    NameConverter smart = new Standard() {
         @Override
         public String toConstantName( String token ) {
             String name = super.toConstantName(token);

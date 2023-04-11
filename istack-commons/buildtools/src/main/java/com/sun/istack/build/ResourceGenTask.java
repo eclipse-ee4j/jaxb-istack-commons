@@ -306,17 +306,11 @@ public class ResourceGenTask extends Task {
             Writer w = super.openSource(pkg,fileName);
 
             PrintWriter out = new PrintWriter(w);
-            FileInputStream fin = null;
-            try {
-                fin = new FileInputStream(license);
+            try (FileInputStream fin = new FileInputStream(license)) {
                 byte[] buf = new byte[8192];
                 int len;
-                while ((len=fin.read(buf)) != -1) {
+                while ((len = fin.read(buf)) != -1) {
                     out.write(new String(buf, 0, len));
-                }
-            } finally {
-                if (fin != null) {
-                    fin.close();
                 }
             }
             out.flush();    // we can't close the stream for that would close the undelying stream.

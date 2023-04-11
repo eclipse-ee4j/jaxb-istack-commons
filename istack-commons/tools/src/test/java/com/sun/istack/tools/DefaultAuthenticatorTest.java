@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -80,11 +80,11 @@ public class DefaultAuthenticatorTest {
     }
 
     @Test
-    public void testGetDefaultAuth() throws Exception {
+    public void testGetDefaultAuth() {
         Authenticator orig = DefaultAuthenticator.getCurrentAuthenticator();
         try {
             DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
-            assertFalse(da.equals(orig));
+            assertNotEquals(orig, da);
             assertEquals(1, getCounter());
             Authenticator auth = DefaultAuthenticator.getCurrentAuthenticator();
             assertNotNull(auth);
