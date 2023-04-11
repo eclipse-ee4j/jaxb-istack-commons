@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -77,19 +77,21 @@
         <spotbugs.exclude>${config.dir}/spotbugs-exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.6.0.0</spotbugs.version>
+        <spotbugs.version>4.7.3.4</spotbugs.version>
 
-        <activation.version>2.1.0</activation.version>
-        <maven.api.version>3.8.5</maven.api.version>
-        <maven.resolver.version>1.7.3</maven.resolver.version>
+        <activation.version>2.1.1</activation.version>
+        <maven.api.version>3.9.1</maven.api.version>
+        <maven.resolver.version>1.9.7</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
-        <ant.version>1.10.12</ant.version>
-        <codemodel.version>4.0.0-M4</codemodel.version>
-        <plexus-utils.version>3.4.1</plexus-utils.version>
-        <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
-        <testng.version>7.7.0</testng.version>
+        <ant.version>1.10.13</ant.version>
+        <codemodel.version>4.0.2</codemodel.version>
+        <plexus-utils.version>3.5.1</plexus-utils.version>
+        <maven-plugin-annotations.version>3.8.1</maven-plugin-annotations.version>
+        <testng.version>7.7.1</testng.version>
         <args4j.version>2.33</args4j.version>
 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
         <vendor.name>Eclipse Foundation</vendor.name>
@@ -256,12 +258,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>3.11.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
@@ -285,32 +287,32 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.4</version>
+                    <version>5.1.8</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.2</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.gmaven</groupId>
@@ -320,34 +322,34 @@
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy</artifactId>
-                            <version>4.0.1</version>
+                            <version>4.0.11</version>
                         </dependency>
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>4.0.1</version>
+                            <version>4.0.11</version>
                         </dependency>
                     </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-invoker-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.5.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.6.4</version>
+                    <version>3.8.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.7</version>
+                    <version>0.8.9</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -371,7 +373,6 @@
                                     <version>[3.6.0,)</version>
                                 </requireMavenVersion>
                             </rules>
-                            <DependencyConvergence />
                         </configuration>
                     </execution>
                 </executions>
@@ -461,7 +462,7 @@
                         <arg>-Werror</arg>
                     </compilerArgs>
                     <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
+                    <createMissingPackageInfoClass>false</createMissingPackageInfoClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -479,6 +480,10 @@
                         <Implementation-Build-Id>${project.version} - ${buildNumber}</Implementation-Build-Id>
                     </instructions>
                     <niceManifest>true</niceManifest>
+                    <noWarningProjectTypes>
+                        <noWarningProjectType>pom</noWarningProjectType>
+                        <noWarningProjectType>maven-plugin</noWarningProjectType>
+                    </noWarningProjectTypes>
                 </configuration>
                 <executions>
                     <execution>
@@ -568,6 +573,45 @@
                                 <id>default-report</id>
                                 <goals>
                                     <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>license-check</id>
+            <pluginRepositories>
+                <pluginRepository>
+                    <!-- org.eclipse.dash:license-tool-plugin is nor final nor in central yet -->
+                    <id>dash-licenses-snapshots</id>
+                    <url>https://repo.eclipse.org/content/repositories/dash-licenses-snapshots/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.eclipse.dash</groupId>
+                            <artifactId>license-tool-plugin</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.dash</groupId>
+                        <artifactId>license-tool-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>license-check</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>license-check</goal>
                                 </goals>
                             </execution>
                         </executions>

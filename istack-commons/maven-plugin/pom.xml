@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2010, 2022 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2010, 2023 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -101,6 +101,7 @@
                             <mavenOpts>${ittest-proxy}</mavenOpts>
                             <properties>
                                 <resgen.plugin.version>${project.version}</resgen.plugin.version>
+                                <tp.compiler.release>${maven.compiler.release}</tp.compiler.release>
                             </properties>
                         </configuration>
                         <executions>
@@ -138,7 +139,6 @@
                                     <systemPropertyVariables>
                                         <it.projects.dir>${project.build.directory}/it</it.projects.dir>
                                     </systemPropertyVariables>
-                                    <encoding>${project.build.sourceEncoding}</encoding>
                                 </configuration>
                             </execution>
                         </executions>
