@@ -14,7 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -51,7 +51,7 @@ public class LoggerTest {
      * Test source method name resolution
      */
     @Test
-    public void testGetCallerMethodName() throws UnsupportedEncodingException {
+    public void testGetCallerMethodName() {
         Logger istackLogger = Logger.getLogger(LoggerTest.class);
         java.util.logging.Logger utilLogger =
                 java.util.logging.Logger.getLogger(Logger.getSystemLoggerName(LoggerTest.class));
@@ -68,7 +68,7 @@ public class LoggerTest {
 
         streamHandler.flush();
 
-        String logText = outputStream.toString("UTF-8");
+        String logText = outputStream.toString(StandardCharsets.UTF_8);
         Assert.assertEquals("testGetCallerMethodName", logText);
     }
 

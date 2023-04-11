@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -47,7 +47,7 @@ if (itproxy.trim().length() > 0) {
 
 def writer = new FileWriter(new File(project.build.directory, "it-settings.xml"))
 groovy.xml.XmlNodePrinter printer = new groovy.xml.XmlNodePrinter(new PrintWriter(writer))
-printer.setPreserveWhitespace(true);
+printer.setPreserveWhitespace(true)
 printer.print(itsettings)
 
 project.getModel().addProperty("ittest-proxy", itproxy.trim())

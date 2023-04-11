@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,27 +10,27 @@
 
 package com.sun.istack.tools;
 
+import org.xml.sax.Locator;
+import org.xml.sax.helpers.LocatorImpl;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
-import java.net.Authenticator.RequestorType;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import org.xml.sax.Locator;
-import org.xml.sax.helpers.LocatorImpl;
 
 /**
  * @author Vivek Pandey
@@ -126,9 +126,9 @@ public class DefaultAuthenticator extends Authenticator {
             locator.setSystemId(f.getAbsolutePath());
             try {
                 fi = new FileInputStream(f);
-                is = new InputStreamReader(fi, "UTF-8");
+                is = new InputStreamReader(fi, StandardCharsets.UTF_8);
                 in = new BufferedReader(is);
-            } catch (UnsupportedEncodingException | FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 listener.onError(e, locator);
                 return;
             }
@@ -183,7 +183,7 @@ public class DefaultAuthenticator extends Authenticator {
             int j = text.lastIndexOf('@');
             String encodedUrl =
                     text.substring(0, i)
-                    + URLEncoder.encode(text.substring(i, j), "UTF-8")
+                    + URLEncoder.encode(text.substring(i, j), StandardCharsets.UTF_8)
                     + text.substring(j);
             url = new URL(encodedUrl);
         }
@@ -198,7 +198,7 @@ public class DefaultAuthenticator extends Authenticator {
                 String password = authinfo.substring(i + 1);
                 return new AuthInfo(
                         new URL(url.getProtocol(), url.getHost(), url.getPort(), url.getFile()),
-                        user, URLDecoder.decode(password, "UTF-8"));
+                        user, URLDecoder.decode(password, StandardCharsets.UTF_8));
             }
         }
         throw new Exception();
@@ -208,7 +208,7 @@ public class DefaultAuthenticator extends Authenticator {
         return Utils.getCurrentAuthenticator();
     }
 
-    public static interface Receiver {
+    public interface Receiver {
 
         void onParsingError(String line, Locator loc);
 

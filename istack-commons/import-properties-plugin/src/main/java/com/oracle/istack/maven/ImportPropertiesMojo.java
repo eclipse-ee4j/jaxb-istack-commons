@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,7 +10,6 @@
 
 package com.oracle.istack.maven;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -92,11 +91,7 @@ public class ImportPropertiesMojo extends AbstractMojo {
             PropertyResolver resolver = new PropertyResolver(new CommonLogger(getLog()), projectProperties, repoSession, repoSystem, projectRepos);
             resolver.resolveProperties(bomProject);
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (XmlPullParserException ex) {
+        } catch (XmlPullParserException | IOException ex) {
             Logger.getLogger(ImportPropertiesMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

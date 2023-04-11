@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -45,7 +45,7 @@ public class Soimp extends Task {
 
     // either this, or ...
     @Argument
-    List<String> pathArgs = new ArrayList<String>();
+    List<String> pathArgs = new ArrayList<>();
     // these (for Ant)
     private File wsDir;
     private String remoteURL;

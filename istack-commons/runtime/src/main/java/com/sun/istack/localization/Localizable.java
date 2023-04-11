@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,7 +28,7 @@ public interface Localizable {
      *      the first item of {@link #getArguments()} array
      *      holds a String.
      */
-    public String getKey();
+    String getKey();
 
     /**
      * Returns the arguments for message formatting.
@@ -36,10 +36,10 @@ public interface Localizable {
      * @return
      *      can be an array of length 0 but never be null.
      */
-    public Object[] getArguments();
-    public String getResourceBundleName();
+    Object[] getArguments();
+    String getResourceBundleName();
 
-    public ResourceBundle getResourceBundle(Locale locale);
+    ResourceBundle getResourceBundle(Locale locale);
 
     /**
      * Special constant that represents a message that
@@ -48,5 +48,5 @@ public interface Localizable {
      * <p>
      * Use of "new" is to create an unique instance.
      */
-    public static final String NOT_LOCALIZABLE = "\u0000";
+    String NOT_LOCALIZABLE = "\u0000";
 }

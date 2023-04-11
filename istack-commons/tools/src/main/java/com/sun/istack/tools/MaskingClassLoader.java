@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -30,7 +30,7 @@ public class MaskingClassLoader extends ClassLoader {
     }
 
     public MaskingClassLoader(Collection<String> masks) {
-        this(masks.toArray(new String[masks.size()]));
+        this(masks.toArray(new String[0]));
     }
 
     public MaskingClassLoader(ClassLoader parent, String... masks) {
@@ -39,7 +39,7 @@ public class MaskingClassLoader extends ClassLoader {
     }
 
     public MaskingClassLoader(ClassLoader parent, Collection<String> masks) {
-        this(parent, masks.toArray(new String[masks.size()]));
+        this(parent, masks.toArray(new String[0]));
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -11,6 +11,7 @@
 package com.sun.istack.maven;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -330,7 +331,7 @@ class NameUtil {
 
 
     /** All reserved keywords of Java. */
-    private static HashSet<String> reservedKeywords = new HashSet<String>();
+    private static HashSet<String> reservedKeywords = new HashSet<>();
 
     static {
         // see http://java.sun.com/docs/books/tutorial/java/nutsandbolts/_keywords.html
@@ -395,7 +396,6 @@ class NameUtil {
             // and 5.0 keywords
             "enum"
             };
-        for (String word : words)
-            reservedKeywords.add(word);
+        reservedKeywords.addAll(Arrays.asList(words));
     }
 }
