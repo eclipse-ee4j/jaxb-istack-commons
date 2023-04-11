@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -254,8 +254,8 @@ public class ResourceGenMojo extends AbstractMojo {
                 supplier_class = cm.parseType(addLocalizationUtilityPackageName("LocalizableMessageFactory.ResourceBundleSupplier")).boxify();
                 rbundle_class = cm.parseType("java.util.ResourceBundle").boxify();
                 locale_class = cm.parseType("java.util.Locale").boxify();
-            } catch (ClassNotFoundException e) {
-                throw new MojoExecutionException(e.getMessage(), e); // impossible -- but why parseType throwing ClassNotFoundExceptoin!?
+            } catch (Throwable e) {
+                throw new MojoExecutionException(e.getMessage(), e); // impossible -- but why parseType throwing Exception!?
             }
 
             JFieldVar $bundle = clazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL,

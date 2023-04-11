@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,7 +10,6 @@
 
 package com.sun.istack.maven;
 
-import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -93,13 +92,6 @@ public class MetainfServicesCompilerMojo extends AbstractMojo {
      * readonly
      */
     private RepositorySystemSession repoSession;
-
-    /**
-     * parameter expression="${localRepository}"
-     * readonly
-     * required
-     */
-    protected ArtifactRepository localRepository;
 
     @Override
     public void execute() throws MojoExecutionException {
