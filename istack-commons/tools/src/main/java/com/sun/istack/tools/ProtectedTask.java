@@ -55,7 +55,7 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
         // then use a MaskingClassLoader
         // so that the XJC2 classes in the parent class loader
         //  won't interfere with loading XJC1 classes in a child class loader
-        ClassLoader ccl = SecureLoader.getContextClassLoader();
+        ClassLoader ccl = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader cl = createClassLoader();
             @SuppressWarnings("unchecked")
@@ -66,7 +66,7 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
             t.setTaskName(getTaskName());
             root.configure(t);
 
-            SecureLoader.setContextClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(cl);
             try {
                 t.execute();
             } finally {
@@ -81,7 +81,7 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
             throw new BuildException(e);
         } finally {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            SecureLoader.setContextClassLoader(ccl);
+            Thread.currentThread().setContextClassLoader(ccl);
 
             //close/cleanup all classloaders but the one which loaded this class
             while (cl != null && !ccl.equals(cl)) {
@@ -123,7 +123,7 @@ public abstract class ProtectedTask extends Task implements DynamicConfigurator 
             return loader == null ? null
                     : loader.getClass().getName().startsWith("org.gradle.") ? null : loader;
         }
-        return SecureLoader.getParentClassLoader(cl);
+        return cl.getParent();
     }
 
     /**
