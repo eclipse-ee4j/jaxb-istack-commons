@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
+    Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
     Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
@@ -86,6 +87,7 @@
         <ant.version>1.10.15</ant.version>
         <codemodel.version>4.0.7</codemodel.version>
         <plexus-utils.version>4.0.3</plexus-utils.version>
+        <plexus-xml.version>4.1.1</plexus-xml.version>
         <maven-plugin-annotations.version>3.15.2</maven-plugin-annotations.version>
         <testng.version>7.12.0</testng.version>
         <args4j.version>2.37</args4j.version>
@@ -182,6 +184,11 @@
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-utils</artifactId>
                 <version>${plexus-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-xml</artifactId>
+                <version>${plexus-xml.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven.plugin-tools</groupId>
