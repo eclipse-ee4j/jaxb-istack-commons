@@ -51,9 +51,9 @@ jobs:
     - name: Verify
       run: |
         cd istack-commons
-        mvn -B -V -U -C -Pstaging,oss-release,license-check clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
-    - name: Upload license-check info
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-      with:
-        name: license-summary.txt
-        path: istack-commons/target/dash/summary
+        mvn -B -V -U -C -Pstaging,oss-release,license-check clean install org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
+#    - name: Upload license-check info
+#      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+#      with:
+#        name: license-summary.txt
+#        path: istack-commons/target/dash/summary
