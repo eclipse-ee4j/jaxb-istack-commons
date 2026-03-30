@@ -33,11 +33,11 @@ jobs:
 
     steps:
     - name: Checkout for build
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
     - name: Set up JDK
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v5
       with:
         distribution: 'zulu'
         java-version: ${{ matrix.java_version }}
@@ -47,7 +47,7 @@ jobs:
         cd istack-commons
         mvn -B -V -U -C -Pstaging,oss-release,license-check clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true -Dittest=true -Dcopyright.ignoreyear=true
     - name: Upload license-check info
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: license-summary.txt
         path: istack-commons/target/dash/summary
