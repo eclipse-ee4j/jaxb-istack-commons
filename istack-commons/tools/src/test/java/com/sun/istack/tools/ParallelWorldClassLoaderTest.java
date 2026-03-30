@@ -111,6 +111,8 @@ public class ParallelWorldClassLoaderTest {
     @Test
     public void testJaxp() {
         XMLInputFactory inFactory = XMLInputFactory.newInstance();
+        inFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        inFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         Assert.assertEquals(inFactory.getClass().getClassLoader(), ucl);
     }
 

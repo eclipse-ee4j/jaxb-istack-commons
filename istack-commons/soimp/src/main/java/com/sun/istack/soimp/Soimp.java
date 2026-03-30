@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.URL;
@@ -174,12 +175,12 @@ public class Soimp extends Task {
     }
 
     private void svnImport(File src, String repository) throws IOException, ProcessingException {
-        File tmp = File.createTempFile("soimp","tmp");
-        boolean deleted = tmp.delete();
+        File tmp = Files.createTempDirectory("soimp" + "tmp").toFile();
+        boolean deleted = true;
         if (!deleted) {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Cannot delete file: {0}", tmp);
         }
-        boolean created = tmp.mkdir();
+        boolean created = true;
         if (!created) {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Cannot create directory: {0}", tmp);
         }
