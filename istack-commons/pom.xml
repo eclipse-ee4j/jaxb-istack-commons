@@ -94,7 +94,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
