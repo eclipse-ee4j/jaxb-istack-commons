@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -34,6 +35,7 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -140,7 +142,7 @@ public class ResourceGenMojo extends AbstractMojo {
         }
 
         if (encoding == null || encoding.trim().isEmpty()) {
-            encoding =  System.getProperty("file.encoding");
+            encoding = Charset.defaultCharset().displayName();
             getLog().warn("File encoding has not been set, using platform encoding "
                     + encoding + ", i.e. build is platform dependent!");
         }
@@ -193,20 +195,10 @@ public class ResourceGenMojo extends AbstractMojo {
             JPackage pkg = cm._package(dirName);
 
             Properties props = new Properties();
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(res);
+            try (FileInputStream in = new FileInputStream(res)) {
                 props.load(in);
             } catch (IOException e) {
                 throw new MojoExecutionException(e.getMessage(), e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException ioe) {
-                        throw new MojoExecutionException(ioe.getMessage(), ioe);
-                    }
-                }
             }
 
             JDefinedClass clazz;
@@ -360,7 +352,7 @@ public class ResourceGenMojo extends AbstractMojo {
     }
 
     private String escape(String s) {
-        return s.replaceAll("<", "{@code <}").replaceAll(">", "{@code >}");
+        return s.replace("<", "{@code <}").replace(">", "{@code >}");
     }
 
 }

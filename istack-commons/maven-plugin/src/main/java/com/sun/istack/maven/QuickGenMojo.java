@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -307,7 +308,7 @@ public class QuickGenMojo extends AbstractMojo {
     private String convertToRegex(String pattern) {
         StringBuilder regex = new StringBuilder();
         char nc = ' ';
-        if (pattern.length() > 0) {
+        if (!pattern.isEmpty()) {
             for (int i = 0; i < pattern.length(); i++) {
                 char c = pattern.charAt(i);
                 nc = ' ';
@@ -427,7 +428,7 @@ public class QuickGenMojo extends AbstractMojo {
 
         // up to date check
         String name = pkg.name();
-        if (name.length() == 0) {
+        if (name.isEmpty()) {
             name = getShortName(className);
         } else {
             name += '.' + getShortName(className);

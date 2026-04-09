@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -145,15 +146,13 @@ class NameUtil {
      * Classify a character into 5 categories that determine the word break.
      */
     protected int classify(char c0) {
-        switch(Character.getType(c0)) {
-        case Character.UPPERCASE_LETTER:        return UPPER_LETTER;
-        case Character.LOWERCASE_LETTER:        return LOWER_LETTER;
-        case Character.TITLECASE_LETTER:
-        case Character.MODIFIER_LETTER:
-        case Character.OTHER_LETTER:            return OTHER_LETTER;
-        case Character.DECIMAL_DIGIT_NUMBER:    return DIGIT;
-        default:                                return OTHER;
-        }
+        return switch (Character.getType(c0)) {
+            case Character.UPPERCASE_LETTER -> UPPER_LETTER;
+            case Character.LOWERCASE_LETTER -> LOWER_LETTER;
+            case Character.TITLECASE_LETTER, Character.MODIFIER_LETTER, Character.OTHER_LETTER -> OTHER_LETTER;
+            case Character.DECIMAL_DIGIT_NUMBER -> DIGIT;
+            default -> OTHER;
+        };
     }
 
 
@@ -301,7 +300,7 @@ class NameUtil {
      * Checks if a given string is usable as a Java identifier.
      */
     public static boolean isJavaIdentifier(String s) {
-        if(s.length()==0)   return false;
+        if(s.isEmpty())   return false;
         if( reservedKeywords.contains(s) )  return false;
 
         if(!Character.isJavaIdentifierStart(s.charAt(0)))   return false;
@@ -317,14 +316,14 @@ class NameUtil {
      * Checks if the given string is a valid Java package name.
      */
     public static boolean isJavaPackageName(String s) {
-        while(s.length()!=0) {
+        while(!s.isEmpty()) {
             int idx = s.indexOf('.');
             if(idx==-1) idx=s.length();
             if( !isJavaIdentifier(s.substring(0,idx)) )
                 return false;
 
             s = s.substring(idx);
-            if(s.length()!=0)    s = s.substring(1);    // remove '.'
+            if(!s.isEmpty())    s = s.substring(1);    // remove '.'
         }
         return true;
     }

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -34,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,8 +119,8 @@ public class ResourceGenTask extends Task {
             throw new BuildException("Cannot write to destdir");
         }
 
-        if (encoding == null || encoding.trim().length() == 0) {
-            encoding =  System.getProperty("file.encoding");
+        if (encoding == null || encoding.trim().isEmpty()) {
+            encoding = Charset.defaultCharset().displayName();
             log("File encoding has not been set, using platform encoding "
                     + encoding + ", i.e. build is platform dependent!",
                     Project.MSG_WARN);
@@ -151,20 +153,10 @@ public class ResourceGenTask extends Task {
             JPackage pkg = cm._package(dirName);
 
             Properties props = new Properties();
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(res);
+            try (FileInputStream in = new FileInputStream(res)) {
                 props.load(in);
             } catch (IOException e) {
                 throw new BuildException(e.getMessage(), e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException ioe) {
-                        throw new BuildException(ioe.getMessage(), ioe);
-                    }
-                }
             }
 
             JDefinedClass clazz;

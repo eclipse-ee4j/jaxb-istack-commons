@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -234,7 +235,7 @@ public class XMLStreamReaderToContentHandler {
 
         try {
             String pfix = qName.getPrefix();
-            String rawname = (pfix == null || pfix.length() == 0)
+            String rawname = (pfix == null || pfix.isEmpty())
                     ? qName.getLocalPart()
                     : pfix + ':' + qName.getLocalPart();
             // fire endElement
@@ -272,7 +273,7 @@ public class XMLStreamReaderToContentHandler {
             QName qName = staxStreamReader.getName();
             String prefix = qName.getPrefix();
             String rawname;
-            if(prefix==null || prefix.length()==0)
+            if(prefix==null || prefix.isEmpty())
                 rawname = qName.getLocalPart();
             else
                 rawname = prefix + ':' + qName.getLocalPart();
@@ -319,7 +320,7 @@ public class XMLStreamReaderToContentHandler {
             String localName = staxStreamReader.getAttributeLocalName(i);
             String prefix = staxStreamReader.getAttributePrefix(i);
             String qName;
-            if(prefix==null || prefix.length()==0)
+            if(prefix==null || prefix.isEmpty())
                 qName = localName;
             else
                 qName = prefix + ':' + localName;

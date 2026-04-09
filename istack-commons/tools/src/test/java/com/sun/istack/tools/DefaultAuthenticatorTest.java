@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -64,18 +65,18 @@ public class DefaultAuthenticatorTest {
         MyAuthenticator ma = createTestAuthenticator();
         ma.setRequestingURL("http://foo.com/myservice?wsdl");
         assertNull(DefaultAuthenticator.getCurrentAuthenticator());
-        assertEquals(0, getCounter());
+        assertEquals(getCounter(), 0);
         try {
             DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
             assertEquals(ma, da);
-            assertEquals(1, getCounter());
+            assertEquals(getCounter(), 1);
             da.setAuth(new File(url.toURI()), null);
             PasswordAuthentication pa = da.getPasswordAuthentication();
             assertTrue(pa != null && pa.getUserName().equals("duke") && Arrays.equals(pa.getPassword(), "test".toCharArray()));
         } finally {
             DefaultAuthenticator.reset();
             assertNotEquals(ma, DefaultAuthenticator.getCurrentAuthenticator());
-            assertEquals(0, getCounter());
+            assertEquals(getCounter(), 0);
         }
     }
 
@@ -85,14 +86,14 @@ public class DefaultAuthenticatorTest {
         try {
             DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
             assertNotEquals(orig, da);
-            assertEquals(1, getCounter());
+            assertEquals(getCounter(), 1);
             Authenticator auth = DefaultAuthenticator.getCurrentAuthenticator();
             assertNotNull(auth);
             assertEquals(da, auth);
         } finally {
             DefaultAuthenticator.reset();
             assertEquals(orig, DefaultAuthenticator.getCurrentAuthenticator());
-            assertEquals(0, getCounter());
+            assertEquals(getCounter(), 0);
         }
     }
 
@@ -103,32 +104,32 @@ public class DefaultAuthenticatorTest {
 
         try {
             DefaultAuthenticator da = DefaultAuthenticator.getAuthenticator();
-            assertEquals(1, getCounter());
+            assertEquals(getCounter(), 1);
             assertEquals(ma, da);
             da.setAuth(new File(url.toURI()), null);
 
             ma.setRequestingURL("http://server1.myserver.com/MyService/Service.svc?wsdl");
             PasswordAuthentication pa = da.getPasswordAuthentication();
-            assertEquals("user", pa.getUserName());
-            assertEquals(")/_@B8M)gDw", new String(pa.getPassword()));
+            assertEquals(pa.getUserName(), "user");
+            assertEquals(new String(pa.getPassword()), ")/_@B8M)gDw");
 
             ma.setRequestingURL("http://server1.myserver.com/MyService/Service.svc?xsd=xsd0");
             pa = da.getPasswordAuthentication();
-            assertEquals("user", pa.getUserName());
-            assertEquals(")/_@B8M)gDw", new String(pa.getPassword()));
+            assertEquals(pa.getUserName(), "user");
+            assertEquals(new String(pa.getPassword()), ")/_@B8M)gDw");
 
             ma.setRequestingURL("http://server1.myserver.com/MyService/Service.svc");
             pa = da.getPasswordAuthentication();
-            assertEquals("user", pa.getUserName());
-            assertEquals(")/_@B8M)gDw", new String(pa.getPassword()));
+            assertEquals(pa.getUserName(), "user");
+            assertEquals(new String(pa.getPassword()), ")/_@B8M)gDw");
 
             ma.setRequestingURL("http://server1.myserver.com/encoded/MyService/Service.svc?wsdl");
             pa = da.getPasswordAuthentication();
-            assertEquals("user2", pa.getUserName());
-            assertEquals(")/_@B8M)gDw", new String(pa.getPassword()));
+            assertEquals(pa.getUserName(), "user2");
+            assertEquals(new String(pa.getPassword()), ")/_@B8M)gDw");
         } finally {
             DefaultAuthenticator.reset();
-            assertEquals(0, getCounter());
+            assertEquals(getCounter(), 0);
         }
     }
 

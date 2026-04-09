@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -78,7 +79,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
         StringBuilder buf = new StringBuilder();
         for( int i=0; i<digits.length; i++ ) {
             if(i!=0)    buf.append('.');
-            buf.append( Integer.toString(digits[i]) );
+            buf.append(digits[i]);
         }
         return buf.toString();
     }

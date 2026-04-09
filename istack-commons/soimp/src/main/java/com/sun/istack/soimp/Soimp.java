@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -152,12 +153,7 @@ public class Soimp extends Task {
         if(svnExe!=null)
             svn = svnExe;
 
-        listener = new Listener() {
-            @Override
-            public void info(String line) {
-                log(line,Project.MSG_INFO);
-            }
-        };
+        listener = line -> log(line,Project.MSG_INFO);
         if(wsDir==null)
             throw new BuildException("Required @dir is missing");
         if(!wsDir.exists())

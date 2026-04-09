@@ -21,7 +21,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sun.istack</groupId>
     <artifactId>import-properties-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>istack common import properties plugin</name>
@@ -52,6 +51,7 @@
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-xml</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
