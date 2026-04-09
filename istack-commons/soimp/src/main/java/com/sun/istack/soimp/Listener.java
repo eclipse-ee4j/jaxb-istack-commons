@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2012, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -16,10 +17,5 @@ package com.sun.istack.soimp;
 public interface Listener {
     void info(String line);
 
-    Listener CONSOLE = new Listener() {
-        @Override
-        public void info(String line) {
-            System.out.println(line);
-        }
-    };
+    Listener CONSOLE = System.out::println;
 }

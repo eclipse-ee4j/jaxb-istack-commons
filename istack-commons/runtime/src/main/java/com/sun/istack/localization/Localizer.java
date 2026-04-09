@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -14,6 +15,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -42,7 +44,7 @@ public class Localizer {
 
     public String localize(Localizable l) {
         String key = l.getKey();
-        if (key == Localizable.NOT_LOCALIZABLE) {
+        if (Objects.equals(key, Localizable.NOT_LOCALIZABLE)) {
             // this message is not localizable
             return (String) l.getArguments()[0];
         }

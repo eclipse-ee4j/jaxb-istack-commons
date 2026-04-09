@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -198,7 +199,7 @@ public class ParallelWorldClassLoader extends ClassLoader implements Closeable {
             throw new ClassNotFoundException("Loaded outside a jar "+url);
         url = url.substring(4); // cut off jar:
         url = url.substring(0,url.lastIndexOf('!'));    // cut off everything after '!'
-        url = url.replaceAll(" ", "%20"); // support white spaces in path
+        url = url.replace(" ", "%20"); // support white spaces in path
         return new URL(url);
     }
 }

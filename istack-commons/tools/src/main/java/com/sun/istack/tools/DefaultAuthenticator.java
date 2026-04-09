@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 1997, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -138,7 +139,7 @@ public class DefaultAuthenticator extends Authenticator {
                 while ((text = in.readLine()) != null) {
                     locator.setLineNumber(lineno++);
                     //ignore empty lines and treat those starting with '#' as comments
-                    if ("".equals(text.trim()) || text.startsWith("#")) {
+                    if (text.trim().isEmpty() || text.startsWith("#")) {
                         continue;
                     }
                     try {
