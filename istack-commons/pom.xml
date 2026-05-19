@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.3</version>
         <relativePath/>
     </parent>
 
@@ -81,8 +81,8 @@
         <spotbugs.version>4.9.8.3</spotbugs.version>
 
         <activation.version>2.1.4</activation.version>
-        <maven.api.version>3.9.15</maven.api.version>
-        <maven.resolver.version>2.0.17</maven.resolver.version>
+        <maven.api.version>3.9.16</maven.api.version>
+        <maven.resolver.version>2.0.18</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
         <ant.version>1.10.17</ant.version>
         <codemodel.version>4.0.8</codemodel.version>
@@ -309,7 +309,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.6.2</version>
+                    <version>3.6.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -329,12 +329,12 @@
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy</artifactId>
-                            <version>5.0.5</version>
+                            <version>5.0.6</version>
                         </dependency>
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>5.0.5</version>
+                            <version>5.0.6</version>
                         </dependency>
                     </dependencies>
                 </plugin>
