@@ -78,7 +78,7 @@
         <spotbugs.exclude>${config.dir}/spotbugs-exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.9.8.5</spotbugs.version>
+        <spotbugs.version>4.10.2.0</spotbugs.version>
 
         <activation.version>2.1.4</activation.version>
         <maven.api.version>3.9.16</maven.api.version>
