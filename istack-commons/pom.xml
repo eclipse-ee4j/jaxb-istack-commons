@@ -82,13 +82,13 @@
 
         <activation.version>2.1.4</activation.version>
         <maven.api.version>3.9.16</maven.api.version>
-        <maven.resolver.version>2.0.21</maven.resolver.version>
+        <maven.resolver.version>2.0.22</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
-        <ant.version>1.10.17</ant.version>
+        <ant.version>1.10.18</ant.version>
         <codemodel.version>4.0.9</codemodel.version>
-        <plexus-utils.version>4.0.3</plexus-utils.version>
-        <plexus-xml.version>4.1.1</plexus-xml.version>
-        <maven-plugin-annotations.version>3.15.2</maven-plugin-annotations.version>
+        <plexus-utils.version>4.1.0</plexus-utils.version>
+        <plexus-xml.version>4.2.0</plexus-xml.version>
+        <maven-plugin-annotations.version>3.16.0</maven-plugin-annotations.version>
         <testng.version>7.12.0</testng.version>
         <args4j.version>2.37</args4j.version>
 
@@ -329,12 +329,12 @@
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy</artifactId>
-                            <version>5.0.8</version>
+                            <version>5.1.2</version>
                         </dependency>
                         <dependency>
                             <groupId>org.apache.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>5.0.8</version>
+                            <version>5.1.2</version>
                         </dependency>
                     </dependencies>
                 </plugin>
