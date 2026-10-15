@@ -78,7 +78,7 @@
         <spotbugs.exclude>${config.dir}/spotbugs-exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.10.4.1</spotbugs.version>
+        <spotbugs.version>4.10.5.0</spotbugs.version>
 
         <activation.version>2.1.4</activation.version>
         <maven.api.version>3.10.0</maven.api.version>
@@ -299,7 +299,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>6.1.2</version>
+                    <version>6.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
