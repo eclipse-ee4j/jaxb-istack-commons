@@ -81,7 +81,7 @@
         <spotbugs.version>4.10.5.0</spotbugs.version>
 
         <activation.version>2.1.4</activation.version>
-        <maven.api.version>3.10.0</maven.api.version>
+        <maven.api.version>3.10.1</maven.api.version>
         <maven.resolver.version>2.0.25</maven.resolver.version>
         <junit.version>4.13.2</junit.version>
         <ant.version>1.10.18</ant.version>
